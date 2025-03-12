@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color pinksahdebackground =  Color(0xFFF6A3A3);
+  static const Color pinksahdebackground = Color(0xFFF6A3A3);
 
   static const Color grayishBlue = Color(0xFF283c63);
   static const Color white = Color(0xFFffffff);
@@ -31,4 +31,8 @@ class AppColors {
 
   static const Color greynew = Color(0xFF676767);
   static const Color redish = Color(0xFFFF3B30);
+  static const Color buttoncolourforapp = Color(0xFF2B3A67);
+  static const Color tealbackground = Color(0xFF00796B);
+
+  static const Color ifhewanttochangethebackground = Color(0xFF1A1A2E);
 }

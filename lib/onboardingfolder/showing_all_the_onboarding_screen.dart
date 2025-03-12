@@ -90,7 +90,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           },
                           textalignment: TextAlign.start,
                           text: "LOG IN",
-                          backgroundColor: const Color(0xFF2B3A67),
+                          backgroundColor: AppColors.buttoncolourforapp,
                           // backgroundColor: AppColors.blue,
                           // backgroundColor: Appcolors.containerbackground,
                         ),
