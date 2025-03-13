@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -83,8 +81,7 @@ class AppInput extends StatelessWidget {
       fillColor: backColor,
       hintText: placeHolder,
       iconColor: const Color(0xFFD4DDE5),
-      contentPadding:
-          EdgeInsets.symmetric(horizontal: 20, vertical: verticalPadding!),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: verticalPadding!),
       border: const OutlineInputBorder(),
       focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(color: borderColor!),
@@ -125,11 +122,8 @@ class AppInput extends StatelessWidget {
         ),
       ),
       hintStyle: textarea
-          ? interFont(color: AppColors.white, fontweight: FontWeight.w400)
-          : interFont(
-              color: AppColors.black,
-              fontweight: FontWeight.w500,
-              fontsize: 15),
+          ? interFont(color: AppColors.white, fontweight: FontWeight.w400, fontsize: 15)
+          : interFont(color: AppColors.black, fontweight: FontWeight.w500, fontsize: 15),
       suffixIcon: showPasswordIcon!
           ? InkWell(
               onTap: onTap,
@@ -191,6 +185,7 @@ class AppInput extends StatelessWidget {
             ),
           8.verticalSpace,
           TextFormField(
+            cursorColor: AppColors.black,
             readOnly: readonly,
             onFieldSubmitted: onEnventSumbit,
             autofocus: isAutoFocus,

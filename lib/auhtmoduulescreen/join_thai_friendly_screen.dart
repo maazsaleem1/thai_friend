@@ -40,6 +40,8 @@ class RegisterInTheApp extends StatelessWidget {
             ),
             Positioned(
               bottom: 20,
+              right: 0,
+              left: 0,
               child: Column(
                 children: [
                   AppButton(

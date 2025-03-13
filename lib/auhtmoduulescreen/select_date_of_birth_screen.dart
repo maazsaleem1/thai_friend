@@ -15,20 +15,7 @@ class DateOfBirthPicker extends StatelessWidget {
   final RxBool showDayGrid = false.obs;
 
   final List<String> years = List.generate(40, (index) => '${2025 - index}');
-  final List<String> months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ];
+  final List<String> months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   DateOfBirthPicker({super.key});
 
@@ -41,8 +28,7 @@ class DateOfBirthPicker extends StatelessWidget {
     int year = int.tryParse(selectedYear.value) ?? DateTime.now().year;
 
     int daysInMonth = DateTime(year, monthIndex + 1, 0).day;
-    return List.generate(
-        daysInMonth, (index) => '${index + 1}'.padLeft(2, '0'));
+    return List.generate(daysInMonth, (index) => '${index + 1}'.padLeft(2, '0'));
   }
 
   @override
@@ -59,7 +45,7 @@ class DateOfBirthPicker extends StatelessWidget {
                 const Text(
                   "Date of Birth",
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 25,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
@@ -74,11 +60,7 @@ class DateOfBirthPicker extends StatelessWidget {
                         showMonthGrid.value = false;
                         showDayGrid.value = false;
                       },
-                      child: Obx(() => Text(
-                          selectedYear.value.isEmpty
-                              ? "YYYY"
-                              : selectedYear.value,
-                          style: _labelStyle())),
+                      child: Obx(() => Text(selectedYear.value.isEmpty ? "YYYY" : selectedYear.value, style: _labelStyle())),
                     ),
                     const SizedBox(width: 40),
                     GestureDetector(
@@ -87,11 +69,7 @@ class DateOfBirthPicker extends StatelessWidget {
                         showYearGrid.value = false;
                         showDayGrid.value = false;
                       },
-                      child: Obx(() => Text(
-                          selectedMonth.value.isEmpty
-                              ? "MM"
-                              : selectedMonth.value,
-                          style: _labelStyle())),
+                      child: Obx(() => Text(selectedMonth.value.isEmpty ? "MM" : selectedMonth.value, style: _labelStyle())),
                     ),
                     const SizedBox(width: 40),
                     GestureDetector(
@@ -100,9 +78,7 @@ class DateOfBirthPicker extends StatelessWidget {
                         showYearGrid.value = false;
                         showMonthGrid.value = false;
                       },
-                      child: Obx(() => Text(
-                          selectedDay.value.isEmpty ? "DD" : selectedDay.value,
-                          style: _labelStyle())),
+                      child: Obx(() => Text(selectedDay.value.isEmpty ? "DD" : selectedDay.value, style: _labelStyle())),
                     ),
                   ],
                 ),
@@ -118,19 +94,13 @@ class DateOfBirthPicker extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 // Year Grid
-                Obx(() => showYearGrid.value
-                    ? _buildWrapGrid(years, selectedYear, showYearGrid)
-                    : const SizedBox.shrink()),
+                Obx(() => showYearGrid.value ? _buildWrapGrid(years, selectedYear, showYearGrid) : const SizedBox.shrink()),
 
                 // Month Grid
-                Obx(() => showMonthGrid.value
-                    ? _buildWrapGrid(months, selectedMonth, showMonthGrid)
-                    : const SizedBox.shrink()),
+                Obx(() => showMonthGrid.value ? _buildWrapGrid(months, selectedMonth, showMonthGrid) : const SizedBox.shrink()),
 
                 // Day Grid (Dynamic)
-                Obx(() => showDayGrid.value
-                    ? _buildWrapGrid(getDays(), selectedDay, showDayGrid)
-                    : const SizedBox.shrink()),
+                Obx(() => showDayGrid.value ? _buildWrapGrid(getDays(), selectedDay, showDayGrid) : const SizedBox.shrink()),
 
                 const Spacer(),
               ],
@@ -138,8 +108,7 @@ class DateOfBirthPicker extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding:
-              EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+          padding: EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
           child: BottomAppBar(
             clipBehavior: Clip.none,
             color: AppColors.pinksahdebackground,
@@ -163,8 +132,7 @@ class DateOfBirthPicker extends StatelessWidget {
     );
   }
 
-  Widget _buildWrapGrid(
-      List<String> items, RxString selectedValue, RxBool visibility) {
+  Widget _buildWrapGrid(List<String> items, RxString selectedValue, RxBool visibility) {
     return Wrap(
       spacing: 8.0,
       runSpacing: 8.0,
@@ -178,17 +146,12 @@ class DateOfBirthPicker extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
             decoration: BoxDecoration(
-              color: isSelected
-                  ? AppColors.tealbackground
-                  : AppColors.tealbackground.withOpacity(0.5),
+              color: isSelected ? AppColors.tealbackground : AppColors.tealbackground.withOpacity(0.5),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               item,
-              style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 16,
-                  fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300),
+              style: TextStyle(color: AppColors.white, fontSize: 16, fontWeight: isSelected ? FontWeight.w700 : FontWeight.w300),
             ),
           ),
         );

@@ -23,11 +23,7 @@ class UploadAPhotoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 70.verticalSpace,
-                AppText(
-                    text: "Add Photo",
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.white),
+                AppText(text: "Add Photo", fontSize: 22.sp, fontWeight: FontWeight.w700, color: AppColors.white),
                 10.verticalSpace,
                 DottedBorder(
                   color: Colors.black,
@@ -37,9 +33,7 @@ class UploadAPhotoScreen extends StatelessWidget {
                   child: Container(
                     height: 150.h,
                     width: 150.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        color: Colors.transparent),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: Colors.transparent),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -83,7 +77,10 @@ class UploadAPhotoScreen extends StatelessWidget {
                 10.verticalSpace,
                 Row(
                   children: [
-                    const Icon(Icons.cancel),
+                    const Icon(
+                      Icons.cancel,
+                      color: AppColors.black,
+                    ),
                     5.horizontalSpace,
                     AppText(
                       text: "No nudity, celebrities, or children",
@@ -98,8 +95,7 @@ class UploadAPhotoScreen extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding:
-              EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+          padding: EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
           child: BottomAppBar(
             clipBehavior: Clip.none,
             color: AppColors.pinksahdebackground,
