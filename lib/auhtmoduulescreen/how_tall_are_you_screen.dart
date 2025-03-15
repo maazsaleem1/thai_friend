@@ -80,8 +80,7 @@ class _HowTallAreYouScreenState extends State<HowTallAreYouScreen> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding:
-              EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+          padding: EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
           child: BottomAppBar(
             clipBehavior: Clip.none,
             color: AppColors.pinksahdebackground,

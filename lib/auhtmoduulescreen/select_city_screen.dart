@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:thai_friendly_app/auhtmoduulescreen/profile_headline_and_description.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/onboardingfolder/custom_button.dart';
@@ -62,7 +64,7 @@ class LocationScreenSelect extends StatelessWidget {
             color: AppColors.pinksahdebackground,
             child: AppButton(
               onPress: () {
-                // Get.to(() => const WhatIsYourWeightScreen());
+                Get.to(() => const AddProfileAndDescription());
               },
               horizontalMargin: 30,
               text: "Continue",

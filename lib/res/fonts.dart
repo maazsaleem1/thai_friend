@@ -9,7 +9,7 @@ TextStyle interFont({
   decorationcolor,
   decorationstyle,
 }) {
-  return GoogleFonts.inter(
+  return GoogleFonts.urbanist(
     color: color,
     fontSize: double.parse('$fontsize'),
     fontWeight: fontweight,

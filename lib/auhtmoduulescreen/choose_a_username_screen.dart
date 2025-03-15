@@ -56,8 +56,7 @@ class ChooseAUsername extends StatelessWidget {
             10.verticalSpace,
             AppText(
               textalignment: TextAlign.center,
-              text:
-                  "Usernames are visible to others memeber and can contains letter and numbers only",
+              text: "Usernames are visible to others memeber and can contains letter and numbers only",
               fontSize: 15.sp,
               fontWeight: FontWeight.w500,
               color: AppColors.white,
@@ -66,8 +65,9 @@ class ChooseAUsername extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding:
-            EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+        padding: EdgeInsets.only(
+          bottom: 20.h,
+        ), // Adjust the space from the bottom
         child: BottomAppBar(
           clipBehavior: Clip.none,
           color: AppColors.pinksahdebackground,
