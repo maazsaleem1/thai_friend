@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:thai_friendly_app/EnterAppScreens/search_screens.dart';
 import 'package:thai_friendly_app/splash_Screen.dart';
 import 'package:thai_friendly_app/themesfolder/dark_theme.dart';
 import 'package:thai_friendly_app/themesfolder/light_theme.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: lightTheme,
         darkTheme: darkTheme,
-        home: const SearchScreens(),
+        home: const SplashScreen(),
       ),
     );
   }

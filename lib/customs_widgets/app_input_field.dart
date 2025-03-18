@@ -37,6 +37,9 @@ class AppInput extends StatelessWidget {
     this.errorborderradius = 10,
     this.focusedErrorBorder = 10,
     this.borderColor = AppColors.darkGreyColor,
+    this.hintstylecolour = AppColors.black,
+    this.thecolourwhichuserwriteintextfield = AppColors.black,
+    this.iffieldneedboxshadow = false,
     super.key,
   });
 
@@ -71,6 +74,9 @@ class AppInput extends StatelessWidget {
   final bool isCounterText;
   final bool isAutoFocus;
   final Color? borderColor;
+  final Color? hintstylecolour;
+  final Color? thecolourwhichuserwriteintextfield;
+  final bool iffieldneedboxshadow;
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +128,7 @@ class AppInput extends StatelessWidget {
         ),
       ),
       hintStyle: textarea
-          ? interFont(color: AppColors.white, fontweight: FontWeight.w400, fontsize: 15)
+          ? interFont(color: hintstylecolour, fontweight: FontWeight.w400, fontsize: 15)
           : interFont(color: AppColors.black, fontweight: FontWeight.w500, fontsize: 15),
       suffixIcon: showPasswordIcon!
           ? InkWell(
@@ -166,6 +172,17 @@ class AppInput extends StatelessWidget {
         horizontalMargin!,
         bottomMargin!,
       ),
+      decoration: iffieldneedboxshadow
+          ? BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                ),
+              ],
+            )
+          : null,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -185,12 +202,12 @@ class AppInput extends StatelessWidget {
             ),
           8.verticalSpace,
           TextFormField(
-            cursorColor: AppColors.black,
+            cursorColor: Theme.of(context).colorScheme.onPrimary,
             readOnly: readonly,
             onFieldSubmitted: onEnventSumbit,
             autofocus: isAutoFocus,
             style: TextStyle(
-              color: AppColors.black,
+              color: thecolourwhichuserwriteintextfield,
               fontSize: 14.sp,
             ),
             keyboardType: keyboardType,
