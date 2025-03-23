@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/auhtmoduulescreen/terms_and_accept_screen.dart';
 import 'package:thai_friendly_app/onboardingfolder/custom_button.dart';
@@ -23,10 +24,24 @@ class _WhatIsYourWeightScreenState extends State<WhatIsYourWeightScreen> {
         backgroundColor: AppColors.pinksahdebackground, // Background color
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              10.verticalSpace,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    "assets/images/backicon.svg",
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+              25.verticalSpace,
 
-              // Title
               const Text(
                 'What is Your Weight?',
                 style: TextStyle(
@@ -36,21 +51,18 @@ class _WhatIsYourWeightScreenState extends State<WhatIsYourWeightScreen> {
                 ),
               ),
 
-              const SizedBox(height: 40),
-
-              // Vertical Slider
               Expanded(
                 child: Center(
-                  child: Container(
+                  child: SizedBox(
                     width: 1.sw,
-                    color: AppColors.tealbackground.withOpacity(0.5), // Slider background
+                    height: 400.h,
                     child: RotatedBox(
                       quarterTurns: -1, // Rotates the slider vertically
                       child: Slider(
                         value: _weightKg,
                         min: 30, // Minimum weight (kg)
                         max: 150, // Maximum weight (kg)
-                        activeColor: AppColors.tealbackground, // Active track color
+                        activeColor: AppColors.orangebackgroundfortextandbutton, // Active track color
                         inactiveColor: AppColors.white, // Inactive track color
                         onChanged: (value) {
                           setState(() {
@@ -89,9 +101,11 @@ class _WhatIsYourWeightScreenState extends State<WhatIsYourWeightScreen> {
               onPress: () {
                 Get.to(() => const TermsAndCondition());
               },
-              horizontalMargin: 30,
+              fontsize: 18,
+              horizontalMargin: 20,
               text: "Continue",
-              backgroundColor: AppColors.buttoncolourforapp,
+              textColor: AppColors.white,
+              backgroundColor: AppColors.orangebackgroundfortextandbutton,
             ),
           ),
         ));

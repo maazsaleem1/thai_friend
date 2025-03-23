@@ -63,21 +63,18 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       children: [
                         AppButton(
                           verticalMargin: 13.h,
-                          fontweight: FontWeight.w700,
                           onPress: () {
                             Get.to(() => const RegisterInTheApp());
                           },
                           textalignment: TextAlign.start,
                           text: "JOIN THAIFRIENDLY",
-                          // backgroundColor: const Color(0xfff6a3a3),
-                          backgroundColor: AppColors.yellowColor,
-                          // backgroundColor: Appcolors.containerbackground,
+                          backgroundColor: AppColors.orangebackgroundfortextandbutton,
+                          textColor: AppColors.white,
                         ),
                         10.verticalSpace,
                         AppButton(
                           verticalMargin: 13.h,
-
-                          fontweight: FontWeight.w500,
+                          fontweight: FontWeight.w800,
                           onPress: () {
                             if (index < 2) {
                               pageController.nextPage(
@@ -90,9 +87,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           },
                           textalignment: TextAlign.start,
                           text: "LOG IN",
-                          backgroundColor: AppColors.buttoncolourforapp,
-                          // backgroundColor: AppColors.blue,
-                          // backgroundColor: Appcolors.containerbackground,
+                          backgroundColor: AppColors.white,
+                          textColor: AppColors.orangebackgroundfortextandbutton,
                         ),
                       ],
                     );

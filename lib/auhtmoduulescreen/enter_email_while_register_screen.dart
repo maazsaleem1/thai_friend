@@ -14,48 +14,47 @@ class RegisterEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: false,
+      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.pinksahdebackground,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            height: 150.h,
-            width: 1.sw,
-            color: const Color(0xFF00796B).withOpacity(0.5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                10.verticalSpace,
-                Text(
-                  'We will send a code to the email below',
-                  style: interFont(
-                    fontsize: 15,
-                    fontweight: FontWeight.w700,
-                    color: AppColors.white,
-                  ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              10.verticalSpace,
+              Text(
+                'We will send a code to the email below',
+                style: interFont(
+                  fontsize: 20.sp,
+                  fontweight: FontWeight.w700,
+                  color: AppColors.white,
                 ),
-                10.verticalSpace,
-                const AppInput(
-                  placeHolder: "your@email.address",
-                  verticalPadding: 0,
-                  horizontalMargin: 50,
-                  backColor: Color(0xFF00796B),
-                  bottomMargin: 0,
-                  borderColor: Colors.transparent,
-                ),
-                5.verticalSpace,
-                AppButton(
-                  verticalMargin: 10,
-                  horizontalMargin: 70.w,
-                  text: "EMAIL CODE",
-                  backgroundColor: AppColors.buttoncolourforapp,
-                  fontweight: FontWeight.w500,
-                  onPress: () {
-                    Get.to(() => const OtpAfterSignup());
-                  },
-                ),
-              ],
-            ),
+              ),
+              30.verticalSpace,
+              const AppInput(
+                // isAutoFocus: true,
+                isCounterText: true,
+                placeHolder: "your@email.address",
+                verticalPadding: 0,
+                horizontalMargin: 20,
+                backColor: AppColors.white,
+                bottomMargin: 0,
+                borderColor: Colors.transparent,
+              ),
+              30.verticalSpace,
+              AppButton(
+                verticalMargin: 10,
+                horizontalMargin: 50.w,
+                text: "EMAIL CODE",
+                backgroundColor: AppColors.orangebackgroundfortextandbutton,
+                textColor: AppColors.white,
+                onPress: () {
+                  Get.to(() => const OtpAfterSignup());
+                },
+              ),
+            ],
           ),
         ],
       ),

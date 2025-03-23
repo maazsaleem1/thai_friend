@@ -19,49 +19,50 @@ class ChooseAUsername extends StatelessWidget {
       backgroundColor: AppColors.pinksahdebackground,
       body: SizedBox(
         width: 1.sw,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            45.verticalSpace,
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              alignment: Alignment.topLeft,
-              child: GestureDetector(
-                onTap: () {
-                  Get.back();
-                },
-                child: SvgPicture.asset(
-                  "assets/images/backicon.svg",
-                  color: AppColors.black,
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              10.verticalSpace,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    "assets/images/backicon.svg",
+                    color: AppColors.white,
+                  ),
                 ),
               ),
-            ),
-            25.verticalSpace,
-            AppText(
-              text: "Choose a Username",
-              fontSize: 22.sp,
-              fontWeight: FontWeight.w700,
-              color: AppColors.white,
-            ),
-            15.verticalSpace,
-            const AppInput(
-              label: "Username",
-              placeHolder: "Enter Username",
-              verticalPadding: 0,
-              horizontalMargin: 20,
-              backColor: AppColors.tealbackground,
-              bottomMargin: 0,
-              borderColor: Colors.transparent,
-            ),
-            10.verticalSpace,
-            AppText(
-              textalignment: TextAlign.center,
-              text: "Usernames are visible to others memeber and can contains letter and numbers only",
-              fontSize: 15.sp,
-              fontWeight: FontWeight.w500,
-              color: AppColors.white,
-            ),
-          ],
+              25.verticalSpace,
+              AppText(
+                text: "Choose a Username",
+                fontSize: 22.sp,
+                fontWeight: FontWeight.w700,
+                color: AppColors.white,
+              ),
+              15.verticalSpace,
+              const AppInput(
+                label: "Username",
+                placeHolder: "Enter Username",
+                verticalPadding: 0,
+                horizontalMargin: 20,
+                backColor: AppColors.white,
+                bottomMargin: 0,
+              ),
+              10.verticalSpace,
+              AppText(
+                textalignment: TextAlign.center,
+                text: "Usernames are visible to others memeber and can contains letter and numbers only",
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
+                color: AppColors.white,
+              ),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Padding(
@@ -69,15 +70,16 @@ class ChooseAUsername extends StatelessWidget {
           bottom: 20.h,
         ), // Adjust the space from the bottom
         child: BottomAppBar(
-          clipBehavior: Clip.none,
           color: AppColors.pinksahdebackground,
           child: AppButton(
+            fontsize: 18,
             onPress: () {
               Get.to(() => const UploadAPhotoScreen());
             },
+            textColor: AppColors.white,
             horizontalMargin: 0,
             text: "Continue",
-            backgroundColor: AppColors.buttoncolourforapp,
+            backgroundColor: AppColors.orangebackgroundfortextandbutton,
           ),
         ),
       ),

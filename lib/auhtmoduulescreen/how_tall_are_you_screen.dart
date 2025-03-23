@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/auhtmoduulescreen/what_is%20_the_weight_screen.dart';
 import 'package:thai_friendly_app/onboardingfolder/custom_button.dart';
@@ -27,45 +28,67 @@ class _HowTallAreYouScreenState extends State<HowTallAreYouScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: AppColors.pinksahdebackground, // Dark background color
-        body: Center(
+        body: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Title Text
+              10.verticalSpace,
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 15),
+                alignment: Alignment.topLeft,
+                child: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: SvgPicture.asset(
+                    "assets/images/backicon.svg",
+                    color: AppColors.white,
+                  ),
+                ),
+              ),
+              25.verticalSpace,
               const Text(
                 "How Tall are You?",
                 style: TextStyle(
                   fontSize: 28,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w900,
                   color: Colors.white,
                 ),
               ),
               40.verticalSpace,
-
-              // Vertical Slider
-              Container(
-                width: 1.sw,
-                height: 400,
-                color: AppColors.tealbackground.withOpacity(0.5),
-                child: RotatedBox(
-                  quarterTurns: -1, // Rotates the slider vertically
-                  child: Slider(
-                    value: _height,
-                    min: 100,
-                    max: 220,
-                    activeColor: AppColors.tealbackground,
-                    inactiveColor: AppColors.white,
-                    onChanged: (value) {
-                      setState(() {
-                        _height = value; // Updates height dynamically
-                      });
-                    },
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: SliderTheme(
+                  data: SliderTheme.of(context).copyWith(
+                    inactiveTrackColor: AppColors.white,
+                    activeTrackColor: AppColors.orangebackgroundfortextandbutton,
+                    thumbColor: AppColors.orangebackgroundfortextandbutton,
+                    overlayColor: const Color(0x29eb1555),
+                    thumbShape: const RoundSliderThumbShape(
+                      enabledThumbRadius: 15,
+                    ),
+                    trackHeight: 5,
+                  ),
+                  child: SizedBox(
+                    height: 400.h,
+                    child: RotatedBox(
+                      quarterTurns: -9,
+                      child: Slider(
+                        value: _height,
+                        min: 10,
+                        max: 270,
+                        onChanged: (value) {
+                          setState(() {
+                            _height = value;
+                          });
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ),
 
               40.verticalSpace,
-              // Dynamic Height Display (in cm and feet/inches)
               Text(
                 "${_height.round()}cm / ${cmToFeetAndInches(_height)}",
                 style: const TextStyle(
@@ -88,9 +111,11 @@ class _HowTallAreYouScreenState extends State<HowTallAreYouScreen> {
               onPress: () {
                 Get.to(() => const WhatIsYourWeightScreen());
               },
-              horizontalMargin: 30,
+              horizontalMargin: 20,
               text: "Continue",
-              backgroundColor: AppColors.buttoncolourforapp,
+              fontsize: 18,
+              textColor: AppColors.white,
+              backgroundColor: AppColors.orangebackgroundfortextandbutton,
             ),
           ),
         ));

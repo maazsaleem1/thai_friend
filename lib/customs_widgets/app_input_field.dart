@@ -38,7 +38,7 @@ class AppInput extends StatelessWidget {
     this.focusedErrorBorder = 10,
     this.borderColor = AppColors.darkGreyColor,
     this.hintstylecolour = AppColors.black,
-    this.thecolourwhichuserwriteintextfield = AppColors.black,
+    this.thecolourwhichuserwriteintextfield = AppColors.pinksahdebackground,
     this.iffieldneedboxshadow = false,
     super.key,
   });
@@ -96,8 +96,8 @@ class AppInput extends StatelessWidget {
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: borderColor!,
+        borderSide: const BorderSide(
+          color: Colors.transparent,
         ),
         borderRadius: BorderRadius.circular(
           enabledborderradius!.r,
@@ -194,15 +194,15 @@ class AppInput extends StatelessWidget {
               child: Text(
                 label!,
                 style: interFont(
-                  fontsize: 14.sp,
-                  fontweight: FontWeight.w700,
-                  color: AppColors.black,
+                  fontsize: 18.sp,
+                  fontweight: FontWeight.w500,
+                  color: AppColors.white,
                 ),
               ),
             ),
           8.verticalSpace,
           TextFormField(
-            cursorColor: Theme.of(context).colorScheme.onPrimary,
+            cursorColor: AppColors.pinksahdebackground,
             readOnly: readonly,
             onFieldSubmitted: onEnventSumbit,
             autofocus: isAutoFocus,

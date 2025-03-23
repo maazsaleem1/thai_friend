@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/auhtmoduulescreen/profile_headline_and_description.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
@@ -13,48 +14,65 @@ class LocationScreenSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
+        extendBodyBehindAppBar: false,
         backgroundColor: AppColors.pinksahdebackground,
-        body: SizedBox(
-          width: 1.sw,
-          child: Column(
-            children: [
-              50.verticalSpace,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: AppText(
-                  textalignment: TextAlign.center,
-                  text: "My Current City",
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.white,
+        body: SafeArea(
+          child: SizedBox(
+            width: 1.sw,
+            child: Column(
+              children: [
+                10.verticalSpace,
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 15),
+                  alignment: Alignment.topLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: SvgPicture.asset(
+                      "assets/images/backicon.svg",
+                      color: AppColors.white,
+                    ),
+                  ),
                 ),
-              ),
-              20.verticalSpace,
-              const AppInput(
-                verticalPadding: 30,
-                postfixIcon: Icon(Icons.my_location_sharp),
-                placeHolder: "current city",
-                backColor: AppColors.tealbackground,
-              ),
-              40.verticalSpace,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: AppText(
-                  textalignment: TextAlign.center,
-                  text: "Where I'm From",
-                  fontSize: 25.sp,
-                  fontWeight: FontWeight.w700,
-                  color: AppColors.white,
+                25.verticalSpace,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: AppText(
+                    textalignment: TextAlign.center,
+                    text: "My Current City",
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
-              20.verticalSpace,
-              const AppInput(
-                verticalPadding: 30,
-                postfixIcon: Icon(Icons.arrow_forward_ios_outlined),
-                placeHolder: "country",
-                backColor: AppColors.tealbackground,
-              )
-            ],
+                20.verticalSpace,
+                const AppInput(
+                  // verticalPadding: 30,
+                  postfixIcon: Icon(Icons.my_location_sharp),
+                  placeHolder: "current city",
+                  backColor: AppColors.white,
+                ),
+                40.verticalSpace,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: AppText(
+                    textalignment: TextAlign.center,
+                    text: "Where I'm From",
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.white,
+                  ),
+                ),
+                20.verticalSpace,
+                const AppInput(
+                  postfixIcon: Icon(Icons.arrow_forward_ios_outlined),
+                  placeHolder: "country",
+                  backColor: AppColors.white,
+                )
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Padding(
@@ -66,9 +84,9 @@ class LocationScreenSelect extends StatelessWidget {
               onPress: () {
                 Get.to(() => const AddProfileAndDescription());
               },
-              horizontalMargin: 30,
               text: "Continue",
-              backgroundColor: AppColors.buttoncolourforapp,
+              backgroundColor: AppColors.orangebackgroundfortextandbutton,
+              textColor: AppColors.white,
             ),
           ),
         ));

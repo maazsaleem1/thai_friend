@@ -31,8 +31,9 @@ class AppColors {
 
   static const Color greynew = Color(0xFF676767);
   static const Color redish = Color(0xFFFF3B30);
-  static const Color buttoncolourforapp = Color(0xFF2B3A67);
+  static const Color buttoncolourforapp = Color(0xFFffffff);
   static const Color tealbackground = Color(0xFF00796B);
+  static const Color orangebackgroundfortextandbutton = Color(0xffFF8360);
 
   static const Color ifhewanttochangethebackground = Color(0xFF1A1A2E);
 }

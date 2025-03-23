@@ -30,8 +30,8 @@ class RegisterInTheApp extends StatelessWidget {
                   child: Text(
                     "  Welcome to \n ThaiFriendly!",
                     style: interFont(
-                      fontsize: 25.sp,
-                      fontweight: FontWeight.w700,
+                      fontsize: 30.sp,
+                      fontweight: FontWeight.w800,
                       color: AppColors.white,
                     ),
                   ),
@@ -45,28 +45,29 @@ class RegisterInTheApp extends StatelessWidget {
               child: Column(
                 children: [
                   AppButton(
-                    textColor: AppColors.black,
+                    textColor: AppColors.white,
                     verticalMargin: 13.h,
-                    fontweight: FontWeight.w700,
                     onPress: () {
                       // Get.to(() => const RegisterInTheApp());
                     },
                     textalignment: TextAlign.start,
                     text: "Continue with Google",
-                    // backgroundColor: const Color(0xfff6a3a3),
-                    backgroundColor: AppColors.white,
+                    backgroundColor: AppColors.orangebackgroundfortextandbutton,
+
                     // backgroundColor: Appcolors.containerbackground,
                   ),
                   10.verticalSpace,
                   AppButton(
                     verticalMargin: 13.h,
-                    fontweight: FontWeight.w700,
                     onPress: () {
-                      Get.to(() => const RegisterEmail());
+                      Get.to(
+                        () => const RegisterEmail(),
+                      );
                     },
                     textalignment: TextAlign.start,
                     text: "Continue with Email",
-                    backgroundColor: const Color(0xFF2B3A67),
+                    backgroundColor: AppColors.white,
+                    textColor: AppColors.orangebackgroundfortextandbutton,
                     // backgroundColor: AppColors.blue,
                     // backgroundColor: Appcolors.containerbackground,
                   ),

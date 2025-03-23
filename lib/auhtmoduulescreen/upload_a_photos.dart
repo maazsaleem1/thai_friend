@@ -19,78 +19,103 @@ class UploadAPhotoScreen extends StatelessWidget {
           width: 1.sw,
           child: Padding(
             padding: const EdgeInsets.only(left: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                70.verticalSpace,
-                AppText(text: "Add Photo", fontSize: 22.sp, fontWeight: FontWeight.w700, color: AppColors.white),
-                10.verticalSpace,
-                DottedBorder(
-                  color: Colors.black,
-                  dashPattern: const [5, 3],
-                  strokeWidth: 2,
-                  borderType: BorderType.RRect,
-                  child: Container(
-                    height: 150.h,
-                    width: 150.w,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.r), color: Colors.transparent),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset("assets/images/mediauplaodicon.svg"),
-                      ],
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  10.verticalSpace,
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: SvgPicture.asset(
+                        "assets/images/backicon.svg",
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
-                ),
-                30.verticalSpace,
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/checkmarkicon.svg",
-                      color: AppColors.black,
+                  25.verticalSpace,
+                  AppText(
+                    text: "Add Photo",
+                    fontSize: 25.sp,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.white,
+                  ),
+                  10.verticalSpace,
+                  DottedBorder(
+                    color: Colors.black,
+                    dashPattern: const [5, 3],
+                    strokeWidth: 2,
+                    borderType: BorderType.RRect,
+                    child: Container(
+                      height: 150.h,
+                      width: 150.w,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          10.r,
+                        ),
+                        color: Colors.transparent,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset("assets/images/mediauplaodicon.svg"),
+                        ],
+                      ),
                     ),
-                    5.horizontalSpace,
-                    AppText(
-                      text: "Photos should clearly show your face",
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
-                    ),
-                  ],
-                ),
-                10.verticalSpace,
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      "assets/images/checkmarkicon.svg",
-                      color: AppColors.black,
-                    ),
-                    5.horizontalSpace,
-                    AppText(
-                      text: "Photos should be of yourself",
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
-                    ),
-                  ],
-                ),
-                10.verticalSpace,
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.cancel,
-                      color: AppColors.black,
-                    ),
-                    5.horizontalSpace,
-                    AppText(
-                      text: "No nudity, celebrities, or children",
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.white,
-                    ),
-                  ],
-                )
-              ],
+                  ),
+                  30.verticalSpace,
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/images/checkmarkicon.svg",
+                        color: AppColors.black,
+                      ),
+                      5.horizontalSpace,
+                      AppText(
+                        text: "Photos should clearly show your face",
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.white,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        "assets/images/checkmarkicon.svg",
+                        color: AppColors.black,
+                      ),
+                      5.horizontalSpace,
+                      AppText(
+                        text: "Photos should be of yourself",
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.white,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.cancel,
+                        color: AppColors.black,
+                      ),
+                      5.horizontalSpace,
+                      AppText(
+                        text: "No nudity, celebrities, or children",
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.white,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -104,8 +129,10 @@ class UploadAPhotoScreen extends StatelessWidget {
                 Get.to(() => const SelectGenders());
               },
               horizontalMargin: 0,
+              textColor: AppColors.white,
+              fontsize: 18,
               text: "Upload Photo",
-              backgroundColor: AppColors.buttoncolourforapp,
+              backgroundColor: AppColors.orangebackgroundfortextandbutton,
             ),
           ),
         ));
