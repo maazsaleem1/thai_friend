@@ -5,6 +5,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:thai_friendly_app/EnterAppScreens/detailed_screen.dart';
 import 'package:thai_friendly_app/controllers/userdetail_controllers.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
@@ -50,10 +51,10 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundlight,
       body: Container(
         height: 1.sh,
-        color: Theme.of(context).colorScheme.secondary,
+        color: AppColors.backgroundlight,
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -79,13 +80,6 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 25.w),
                   height: 0.55.sh,
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 1,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
                     borderRadius: BorderRadius.circular(20.r),
                     // color: Colors.amber,
                   ),
@@ -104,6 +98,7 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                                   carouselController: buttonCarouselController,
                                   options: CarouselOptions(
                                     height: 0.55.sh,
+
                                     autoPlay: true,
                                     enlargeCenterPage: true,
                                     viewportFraction: 1.0, // Full width
@@ -115,6 +110,7 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                                   ),
                                   items: users.map((imageUrl) {
                                     return Container(
+                                      width: 1.sw,
                                       margin: const EdgeInsets.all(5),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(10),
@@ -184,14 +180,6 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                                           height: 30,
                                           width: 50,
                                           decoration: BoxDecoration(
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black.withOpacity(0.2),
-                                                spreadRadius: 5,
-                                                blurRadius: 7,
-                                                offset: const Offset(0, 3),
-                                              ),
-                                            ],
                                             borderRadius: BorderRadius.circular(10.r),
                                             color: Theme.of(context).appBarTheme.backgroundColor,
                                           ),
@@ -234,15 +222,8 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                             ),
                             10.verticalSpace,
                             Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10.w),
+                              margin: EdgeInsets.symmetric(horizontal: 15.w),
                               decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.black.withOpacity(0.6),
-                                    blurRadius: 8,
-                                    offset: const Offset(0, 2),
-                                  ),
-                                ],
                                 color: Theme.of(context).appBarTheme.backgroundColor,
                               ),
                               child: Padding(
@@ -293,13 +274,6 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                               padding: EdgeInsets.symmetric(horizontal: 15.w),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withOpacity(0.6),
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 2),
-                                    ),
-                                  ],
                                   color: Theme.of(context).appBarTheme.backgroundColor,
                                 ),
                                 width: double.infinity, // Ensures the container takes the available width
@@ -311,7 +285,7 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                                       margin: const EdgeInsets.all(8),
                                       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
                                       decoration: BoxDecoration(
-                                        color: index == 0 ? const Color(0xff8cfb78) : Colors.grey,
+                                        color: index == 0 ? const Color(0xff8cfb78) : AppColors.backgroundlight,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: AppText(
@@ -326,9 +300,13 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                               ),
                             ),
                             10.verticalSpace,
-                            const AppButton(
+                            AppButton(
+                              onPress: () {
+                                Get.to(() => const DetailedUserScreen());
+                              },
+                              horizontalMargin: 15,
                               text: "View Profile",
-                              backgroundColor: AppColors.buttoncolourforapp,
+                              backgroundColor: AppColors.grayishBlue,
                               textColor: AppColors.white,
                             ),
                             30.verticalSpace
@@ -354,23 +332,19 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                       ),
                       // 10.horizontalSpace,
                       AppInput(
-                        iffieldneedboxshadow: true,
-                        thecolourwhichuserwriteintextfield: Theme.of(context).colorScheme.onPrimary,
                         horizontalMargin: 0,
                         bottomMargin: 10,
                         verticalPadding: 25,
                         placeHolder: "Send yoon650 a message",
-                        backColor: Theme.of(context).appBarTheme.backgroundColor,
-                        borderColor: Theme.of(context).appBarTheme.backgroundColor,
-                        hintstylecolour: Theme.of(context).colorScheme.onPrimary,
                         inputWidth: 220.w,
+                        backColor: AppColors.white,
                       ),
                       5.horizontalSpace,
                       Container(
                         height: 70.h,
                         width: 60,
                         decoration: const BoxDecoration(
-                          color: AppColors.buttoncolourforapp,
+                          color: AppColors.grayishBlue,
                         ),
                         child: Center(
                           child: AppText(

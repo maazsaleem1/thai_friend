@@ -54,8 +54,8 @@ class TermsAndCondition extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.warning_amber_rounded,
-                          color: AppColors.orangebackgroundfortextandbutton,
-                          size: 40,
+                          color: AppColors.white,
+                          size: 45,
                         ),
                         10.horizontalSpace,
                         AppText(
@@ -71,8 +71,8 @@ class TermsAndCondition extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.warning_amber_rounded,
-                          color: AppColors.orangebackgroundfortextandbutton,
-                          size: 40,
+                          color: AppColors.white,
+                          size: 45,
                         ),
                         10.horizontalSpace,
                         AppText(
@@ -88,8 +88,8 @@ class TermsAndCondition extends StatelessWidget {
                       children: [
                         const Icon(
                           Icons.local_florist_sharp,
-                          color: AppColors.orangebackgroundfortextandbutton,
-                          size: 40.0,
+                          color: AppColors.white,
+                          size: 45.0,
                         ),
                         10.horizontalSpace,
                         AppText(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
+import 'package:thai_friendly_app/messagefolder/chat_detailed_screen.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -113,42 +115,47 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
       itemBuilder: (context, index) {
         final chat = chatList[index];
 
-        return ListTile(
-          leading: SizedBox(
-            height: 80,
-            width: 55,
-            child: Image.asset(
-              chat["image"].toString(),
-              fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: () {
+            Get.to(() => ChatDetailedScreen());
+          },
+          child: ListTile(
+            leading: SizedBox(
+              height: 80,
+              width: 55,
+              child: Image.asset(
+                chat["image"].toString(),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          title: AppText(
-            text: chat["name"],
-            fontSize: 16,
-            fontWeight: FontWeight.w800,
-            color: Theme.of(context).colorScheme.onPrimary,
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                text: "${chat["age"]}, ${chat["location"]}",
-                fontSize: 14,
-                color: Colors.grey,
-                fontWeight: FontWeight.w700,
-              ),
-              AppText(
-                text: chat["message"],
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.onPrimary,
-                overflowtext: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-          trailing: Text(
-            chat["time"],
-            style: const TextStyle(color: Colors.grey, fontSize: 12),
+            title: AppText(
+              text: chat["name"],
+              fontSize: 16,
+              fontWeight: FontWeight.w800,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppText(
+                  text: "${chat["age"]}, ${chat["location"]}",
+                  fontSize: 14,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w700,
+                ),
+                AppText(
+                  text: chat["message"],
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                  overflowtext: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
+            trailing: Text(
+              chat["time"],
+              style: const TextStyle(color: Colors.grey, fontSize: 12),
+            ),
           ),
         );
       },

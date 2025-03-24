@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animated_icon_button/tap_fill_icon.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 
@@ -10,14 +11,14 @@ class CustomUserCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).appBarTheme.backgroundColor,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 5,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.black.withOpacity(0.2),
+        //     spreadRadius: 5,
+        //     blurRadius: 7,
+        //     offset: const Offset(0, 3),
+        //   ),
+        // ],
       ),
       child: Column(
         children: [
@@ -73,10 +74,17 @@ class CustomUserCard extends StatelessWidget {
                 height: 30.h,
                 color: Theme.of(context).appBarTheme.iconTheme!.color,
               ),
-              Image.asset(
-                'assets/images/heartwithoutfill.png',
-                height: 30.h,
-                color: Theme.of(context).appBarTheme.iconTheme!.color,
+              const TapFillIcon(
+                borderIcon: Icon(
+                  Icons.favorite_border,
+                  color: Colors.grey,
+                  size: 30,
+                ),
+                fillIcon: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 30,
+                ),
               ),
 
               // Icon(

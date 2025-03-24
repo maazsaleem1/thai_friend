@@ -49,7 +49,6 @@ class LocationScreenSelect extends StatelessWidget {
                 ),
                 20.verticalSpace,
                 const AppInput(
-                  // verticalPadding: 30,
                   postfixIcon: Icon(Icons.my_location_sharp),
                   placeHolder: "current city",
                   backColor: AppColors.white,

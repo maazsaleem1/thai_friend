@@ -36,9 +36,9 @@ class AppInput extends StatelessWidget {
     this.enabledborderradius = 10,
     this.errorborderradius = 10,
     this.focusedErrorBorder = 10,
-    this.borderColor = AppColors.darkGreyColor,
-    this.hintstylecolour = AppColors.black,
-    this.thecolourwhichuserwriteintextfield = AppColors.pinksahdebackground,
+    this.borderColor = AppColors.pinksahdebackground,
+    this.hintstylecolour = AppColors.pinksahdebackground,
+    this.thecolourwhichuserwriteintextfield = AppColors.black,
     this.iffieldneedboxshadow = false,
     super.key,
   });
@@ -96,8 +96,8 @@ class AppInput extends StatelessWidget {
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: const BorderSide(
-          color: Colors.transparent,
+        borderSide: BorderSide(
+          color: borderColor!,
         ),
         borderRadius: BorderRadius.circular(
           enabledborderradius!.r,
@@ -128,7 +128,7 @@ class AppInput extends StatelessWidget {
         ),
       ),
       hintStyle: textarea
-          ? interFont(color: hintstylecolour, fontweight: FontWeight.w400, fontsize: 15)
+          ? interFont(color: hintstylecolour, fontweight: FontWeight.w600, fontsize: 16)
           : interFont(color: AppColors.black, fontweight: FontWeight.w500, fontsize: 15),
       suffixIcon: showPasswordIcon!
           ? InkWell(
