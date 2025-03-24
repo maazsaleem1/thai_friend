@@ -9,14 +9,31 @@ import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_row_fields.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 
-class SearchScreens extends StatefulWidget {
-  const SearchScreens({super.key});
+class SelectedUsersShowsHereScreen extends StatefulWidget {
+  const SelectedUsersShowsHereScreen({super.key});
 
   @override
-  State<SearchScreens> createState() => _SearchScreensState();
+  State<SelectedUsersShowsHereScreen> createState() => _SelectedUsersShowsHereScreenState();
 }
 
-class _SearchScreensState extends State<SearchScreens> {
+class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScreen> {
+  final List<String> menuItems = [
+    "Visited Me",
+    "Liked Me",
+    "My Favorites",
+    "Favorited Me",
+    "My Visits",
+    "My Likes",
+    "Saved Photos",
+    "My Notes",
+  ];
+  final List<String> filters = [
+    "RECENTLY ACTIVE",
+    "HIDE MESSAGED",
+    "NEW MEMBERS",
+    "NEAR ME",
+    "VERIFIED PHOTOS",
+  ];
   RxBool checklist = true.obs;
   RxBool checkgridview = false.obs;
   final GlobalKey<SliderDrawerState> _sliderDrawerKey = GlobalKey<SliderDrawerState>();
@@ -27,33 +44,17 @@ class _SearchScreensState extends State<SearchScreens> {
       // backgroundColor: ,
       body: SafeArea(
         child: SliderDrawer(
-          // sliderBoxShadow: SliderBoxShadow(
-          //   color: Colors.black.withOpacity(0.2),
-          //   blurRadius: 8,
-          //   // offset: const Offset(0, 4),
-          // ),
           isDraggable: false,
           key: _sliderDrawerKey,
-          appBar: AppBar(
-              // backgroundColor: Colors.transparent,
-              ),
+          appBar: AppBar(),
           slider: Container(
             color: AppColors.backgroundlight,
             child: Column(
               children: [
-                // this is the drawer
-
                 Container(
                   height: 50.h,
                   decoration: BoxDecoration(
                     color: Theme.of(context).appBarTheme.backgroundColor,
-                    // boxShadow: [
-                    //   BoxShadow(
-                    //     color: Colors.black.withOpacity(0.2),
-                    //     blurRadius: 8,
-                    //     offset: const Offset(0, 4),
-                    //   ),
-                    // ],
                   ),
                 ),
                 2.verticalSpace,
@@ -212,71 +213,39 @@ class _SearchScreensState extends State<SearchScreens> {
                               ),
                             ),
                             20.horizontalSpace,
-                            SizedBox(
-                              height: 40,
-                              width: 80,
-                              child: Row(
-                                children: [
-                                  Obx(() {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        checklist.value = true;
-                                        checkgridview.value = false;
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              blurRadius: 8,
-                                              offset: const Offset(0, 4),
-                                            ),
-                                          ],
-                                          color: checklist.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
-                                        ),
-                                        child: Icon(
-                                          Icons.grid_view,
-                                          size: 25,
-                                          color: checklist.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
-                                        ),
+                            Row(
+                              children: [
+                                PopupMenuButton<String>(
+                                  onSelected: (value) {
+                                    // Handle selection
+                                    print("Selected: $value");
+                                  },
+                                  itemBuilder: (BuildContext context) {
+                                    return menuItems.map((String choice) {
+                                      return PopupMenuItem<String>(
+                                        value: choice,
+                                        child: Text(choice),
+                                      );
+                                    }).toList();
+                                  },
+                                  child: const Row(
+                                    children: [
+                                      Text(
+                                        "Matches",
+                                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                                       ),
-                                    );
-                                  }),
-                                  Obx(() {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        checklist.value = false;
-                                        checkgridview.value = true;
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              blurRadius: 8,
-                                              offset: const Offset(0, 4),
-                                            ),
-                                          ],
-                                          color: checkgridview.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
-                                        ),
-                                        child: Icon(
-                                          Icons.grid_4x4_rounded,
-                                          size: 25,
-                                          color: checkgridview.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
-                                        ),
+                                      Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: Colors.blue,
+                                        size: 30,
                                       ),
-                                    );
-                                  }),
-                                ],
-                              ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                        Icon(Icons.filter_list, size: 28, color: Colors.grey.shade800),
                       ],
                     ),
                   ),
@@ -290,30 +259,58 @@ class _SearchScreensState extends State<SearchScreens> {
                     Icons.search,
                     color: Theme.of(context).appBarTheme.iconTheme?.color,
                   ),
-                  placeHolder: "Username Search",
+                  placeHolder: "Search Name / City / Headline ",
                   backColor: Theme.of(context).appBarTheme.backgroundColor,
                 ),
-                Obx(() {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7, // Set an appropriate height
-                    child: GridView.builder(
-                      itemCount: 6,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: checkgridview.value ? 3 : 2,
-                        crossAxisSpacing: checkgridview.value ? 5 : 10,
-                        mainAxisSpacing: checkgridview.value ? 5 : 10,
-                        childAspectRatio: checkgridview.value ? 0.45 : 0.7,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                Get.to(() => const DetailedUserScreen());
-                              },
-                              child: const CustomUserCard()),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      alignment: WrapAlignment.center,
+                      children: filters.map((text) {
+                        return OutlinedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: Colors.blue),
+                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          child: Text(
+                            text,
+                            style: const TextStyle(color: Colors.blue, fontSize: 16),
+                          ),
                         );
-                      },
+                      }).toList(),
+                    ),
+                  ),
+                ),
+                Obx(() {
+                  return Expanded(
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.7, // Set an appropriate height
+                      child: GridView.builder(
+                        itemCount: 6,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: checkgridview.value ? 3 : 2,
+                          crossAxisSpacing: checkgridview.value ? 5 : 10,
+                          mainAxisSpacing: checkgridview.value ? 5 : 10,
+                          childAspectRatio: checkgridview.value ? 0.45 : 0.7,
+                        ),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const DetailedUserScreen());
+                                },
+                                child: const CustomUserCard()),
+                          );
+                        },
+                      ),
                     ),
                   );
                 }),

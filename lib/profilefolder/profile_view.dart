@@ -2,23 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
-import 'package:thai_friendly_app/EnterAppScreens/detailed_screen.dart';
-import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
-import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_row_fields.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 
-class SearchScreens extends StatefulWidget {
-  const SearchScreens({super.key});
+class ProfileViewScreens extends StatefulWidget {
+  const ProfileViewScreens({super.key});
 
   @override
-  State<SearchScreens> createState() => _SearchScreensState();
+  State<ProfileViewScreens> createState() => _ProfileViewScreensState();
 }
 
-class _SearchScreensState extends State<SearchScreens> {
+class _ProfileViewScreensState extends State<ProfileViewScreens> {
   RxBool checklist = true.obs;
   RxBool checkgridview = false.obs;
+  RxBool photos = false.obs;
+  RxBool details = true.obs;
+  RxBool reviews = false.obs;
   final GlobalKey<SliderDrawerState> _sliderDrawerKey = GlobalKey<SliderDrawerState>();
   @override
   Widget build(BuildContext context) {
@@ -27,16 +27,9 @@ class _SearchScreensState extends State<SearchScreens> {
       // backgroundColor: ,
       body: SafeArea(
         child: SliderDrawer(
-          // sliderBoxShadow: SliderBoxShadow(
-          //   color: Colors.black.withOpacity(0.2),
-          //   blurRadius: 8,
-          //   // offset: const Offset(0, 4),
-          // ),
           isDraggable: false,
           key: _sliderDrawerKey,
-          appBar: AppBar(
-              // backgroundColor: Colors.transparent,
-              ),
+          appBar: AppBar(),
           slider: Container(
             color: AppColors.backgroundlight,
             child: Column(
@@ -199,124 +192,162 @@ class _SearchScreensState extends State<SearchScreens> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                _sliderDrawerKey.currentState!.toggle();
-                              },
-                              child: Icon(
-                                Icons.menu,
-                                size: 35,
-                                color: Theme.of(context).appBarTheme.iconTheme?.color,
-                              ),
-                            ),
-                            20.horizontalSpace,
-                            SizedBox(
-                              height: 40,
-                              width: 80,
-                              child: Row(
-                                children: [
-                                  Obx(() {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        checklist.value = true;
-                                        checkgridview.value = false;
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              blurRadius: 8,
-                                              offset: const Offset(0, 4),
-                                            ),
-                                          ],
-                                          color: checklist.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
-                                        ),
-                                        child: Icon(
-                                          Icons.grid_view,
-                                          size: 25,
-                                          color: checklist.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                  Obx(() {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        checklist.value = false;
-                                        checkgridview.value = true;
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 40,
-                                        decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: Colors.black.withOpacity(0.2),
-                                              blurRadius: 8,
-                                              offset: const Offset(0, 4),
-                                            ),
-                                          ],
-                                          color: checkgridview.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
-                                        ),
-                                        child: Icon(
-                                          Icons.grid_4x4_rounded,
-                                          size: 25,
-                                          color: checkgridview.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                                ],
-                              ),
-                            ),
-                          ],
+                        GestureDetector(
+                          onTap: () {
+                            _sliderDrawerKey.currentState!.toggle();
+                          },
+                          child: Icon(
+                            Icons.menu,
+                            size: 35,
+                            color: Theme.of(context).appBarTheme.iconTheme?.color,
+                          ),
                         ),
-                        Icon(Icons.filter_list, size: 28, color: Colors.grey.shade800),
                       ],
                     ),
                   ),
                 ),
                 10.verticalSpace,
-                AppInput(
-                  thecolourwhichuserwriteintextfield: Theme.of(context).colorScheme.onPrimary,
-                  verticalPadding: 10,
-                  horizontalMargin: 10,
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: Theme.of(context).appBarTheme.iconTheme?.color,
-                  ),
-                  placeHolder: "Username Search",
-                  backColor: Theme.of(context).appBarTheme.backgroundColor,
-                ),
-                Obx(() {
-                  return SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.7, // Set an appropriate height
-                    child: GridView.builder(
-                      itemCount: 6,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: checkgridview.value ? 3 : 2,
-                        crossAxisSpacing: checkgridview.value ? 5 : 10,
-                        mainAxisSpacing: checkgridview.value ? 5 : 10,
-                        childAspectRatio: checkgridview.value ? 0.45 : 0.7,
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 75.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircleAvatar(
+                        radius: 50,
+                        backgroundImage: AssetImage("assets/images/thaiboy.jpg"),
                       ),
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: GestureDetector(
-                              onTap: () {
-                                Get.to(() => const DetailedUserScreen());
-                              },
-                              child: const CustomUserCard()),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const AppText(
+                              text: "JohnHardy89",
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            const AppText(
+                              text: "Pattaya, Thailand",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.pinksahdebackground,
+                            ),
+                            const SizedBox(height: 5),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppColors.white,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: const Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.verified, color: Colors.grey, size: 14),
+                                  SizedBox(width: 4),
+                                  AppText(
+                                    text: "Not Verified",
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                30.verticalSpace,
+                Container(
+                  width: Get.width * 0.9,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: AppColors.backgroundlight,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 2,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () {
+                            details.value = true;
+                            photos.value = false;
+                            reviews.value = false;
+                          },
+                          child: Container(
+                            height: 40,
+                            width: Get.width * 0.3,
+                            color: details.value ? AppColors.white : Colors.transparent,
+                            child: const Center(
+                              child: AppText(
+                                text: "DETAILS",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
                         );
-                      },
-                    ),
-                  );
-                }),
+                      }),
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () {
+                            photos.value = true;
+                            details.value = false;
+                            reviews.value = false;
+                          },
+                          child: Container(
+                            height: 40,
+                            width: Get.width * 0.3,
+                            color: photos.value ? AppColors.white : Colors.transparent,
+                            child: const Center(
+                              child: AppText(
+                                text: "PHOTOS",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                      Obx(() {
+                        return GestureDetector(
+                          onTap: () {
+                            photos.value = false;
+                            details.value = false;
+                            reviews.value = true;
+                          },
+                          child: Container(
+                            height: 40,
+                            width: Get.width * 0.3,
+                            color: reviews.value ? AppColors.white : Colors.transparent,
+                            child: const Center(
+                              child: AppText(
+                                text: "REVIEWS",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                )
+                ,20.verticalSpace,
+                
               ],
             ),
           ),

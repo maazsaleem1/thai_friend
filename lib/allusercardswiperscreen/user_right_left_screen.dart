@@ -63,13 +63,13 @@ class _AllUserCardSwiperScreenState extends State<AllUserCardSwiperScreen> {
                   height: 50.h,
                   decoration: BoxDecoration(
                     color: Theme.of(context).appBarTheme.backgroundColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ],
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black.withOpacity(0.2),
+                    //     blurRadius: 8,
+                    //     offset: const Offset(0, 4),
+                    //   ),
+                    // ],
                   ),
                   child: const Row(
                     children: [],

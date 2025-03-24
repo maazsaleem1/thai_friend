@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/EnterAppScreens/search_screens.dart';
 import 'package:thai_friendly_app/allusercardswiperscreen/user_right_left_screen.dart';
+import 'package:thai_friendly_app/menunavbarscreen/all_the_selected_user.dart';
 import 'package:thai_friendly_app/messagefolder/inbox_screen.dart';
+import 'package:thai_friendly_app/profilefolder/profile_view.dart';
 
 class NavBarFamily extends StatefulWidget {
   const NavBarFamily({super.key});
@@ -21,8 +23,8 @@ class _NavBarFamilyState extends State<NavBarFamily> {
       const SearchScreens(),
       const AllUserCardSwiperScreen(),
       const ChatScreen(),
-      Container(color: Colors.green),
-      Container(color: Colors.purple),
+      const SelectedUsersShowsHereScreen(),
+      const ProfileViewScreens(),
     ];
 
     return Scaffold(

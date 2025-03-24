@@ -28,7 +28,7 @@ class CustomUserCard extends StatelessWidget {
             decoration: const BoxDecoration(
               // color: Colors.amber,
               image: DecorationImage(
-                image: AssetImage('assets/images/girloneimage.jpg'),
+                image: AssetImage('assets/images/girlfour.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
