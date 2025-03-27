@@ -61,7 +61,8 @@ class _HowTallAreYouScreenState extends State<HowTallAreYouScreen> {
                 child: SliderTheme(
                   data: SliderTheme.of(context).copyWith(
                     inactiveTrackColor: AppColors.white,
-                    activeTrackColor: AppColors.orangebackgroundfortextandbutton,
+                    activeTrackColor:
+                        AppColors.orangebackgroundfortextandbutton,
                     thumbColor: AppColors.orangebackgroundfortextandbutton,
                     overlayColor: const Color(0x29eb1555),
                     thumbShape: const RoundSliderThumbShape(
@@ -103,7 +104,8 @@ class _HowTallAreYouScreenState extends State<HowTallAreYouScreen> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+          padding:
+              EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
           child: BottomAppBar(
             clipBehavior: Clip.none,
             color: AppColors.pinksahdebackground,

@@ -62,7 +62,8 @@ class _WhatIsYourWeightScreenState extends State<WhatIsYourWeightScreen> {
                         value: _weightKg,
                         min: 30, // Minimum weight (kg)
                         max: 150, // Maximum weight (kg)
-                        activeColor: AppColors.orangebackgroundfortextandbutton, // Active track color
+                        activeColor: AppColors
+                            .orangebackgroundfortextandbutton, // Active track color
                         inactiveColor: AppColors.white, // Inactive track color
                         onChanged: (value) {
                           setState(() {
@@ -93,7 +94,8 @@ class _WhatIsYourWeightScreenState extends State<WhatIsYourWeightScreen> {
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
+          padding:
+              EdgeInsets.only(bottom: 20.h), // Adjust the space from the bottom
           child: BottomAppBar(
             clipBehavior: Clip.none,
             color: AppColors.pinksahdebackground,
