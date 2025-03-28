@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 import 'package:thai_friendly_app/settingsfolder/alignment_setting_screen.dart';
 import 'package:thai_friendly_app/settingsfolder/app_setting_screen.dart';
@@ -22,14 +23,16 @@ class _SettingScreenState extends State<SettingScreen> {
     PrivacyScreen(),
   ];
 
-  final List<String> tabs = ["APP", "NOTIFICATION", "ALIGN"];
+  final List<String> tabs = ["APP", "NOTIFICATION", "PRIVACY"];
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.backgroundlight,
         body: Column(
           children: [
+            30.verticalSpace,
             _buildHeader(context),
             SizedBox(height: 20.h),
             _buildTabBar(),
@@ -49,12 +52,22 @@ class _SettingScreenState extends State<SettingScreen> {
       color: Theme.of(context).appBarTheme.backgroundColor,
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       alignment: Alignment.centerLeft,
-      child: GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Text(
-          "Close",
-          style: TextStyle(color: Colors.blue, fontSize: 18.sp),
-        ),
+      child: Row(
+        children: [
+          GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: AppText(
+                  text: "Close",
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blue)),
+          20.horizontalSpace,
+          AppText(
+              text: "Accounts",
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w500,
+              color: AppColors.black),
+        ],
       ),
     );
   }

@@ -134,8 +134,8 @@ class _FilterScreenState extends State<FilterScreen> {
             _searchOption(2, "Search by City / Place"),
 
             if (selectedSearchOption == 2) ...[
-              SizedBox(height: 10),
-              Text("Pattaya",
+              const SizedBox(height: 10),
+              const Text("Pattaya",
                   style: TextStyle(fontSize: 16, color: Colors.black)),
               SizedBox(height: 10),
               // Map Placeholder

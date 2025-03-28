@@ -20,6 +20,7 @@ class PrivacyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: AppColors.backgroundlight,
         body: Column(
           children: [
             Padding(
@@ -45,15 +46,6 @@ class PrivacyScreen extends StatelessWidget {
     );
   }
 
-  // Header Widget (Customize as needed)
-  Widget _buildHeader(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: const Text("Privacy"),
-      backgroundColor: Colors.white,
-    );
-  }
-
   // Tab Bar Widget
   Widget _buildTabBar() {
     return Obx(() => Row(
@@ -72,8 +64,8 @@ class PrivacyScreen extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: selectedIndex.value == index
-                          ? Colors.blue
-                          : Colors.grey,
+                          ? AppColors.orangebackgroundfortextandbutton
+                          : AppColors.pinksahdebackground,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -81,7 +73,7 @@ class PrivacyScreen extends StatelessWidget {
                     height: 3,
                     width: 80,
                     color: selectedIndex.value == index
-                        ? Colors.blue
+                        ? AppColors.orangebackgroundfortextandbutton
                         : Colors.transparent,
                   ),
                 ],
