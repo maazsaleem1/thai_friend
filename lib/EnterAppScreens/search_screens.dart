@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/EnterAppScreens/detailed_screen.dart';
-import 'package:thai_friendly_app/EnterAppScreens/filterscreen.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_row_fields.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 import 'package:thai_friendly_app/settingsfolder/setting_screen.dart';
+import 'package:thai_friendly_app/settingsfolder/premium_options.dart';
 
 class SearchScreens extends StatefulWidget {
   const SearchScreens({super.key});
@@ -21,8 +21,7 @@ class SearchScreens extends StatefulWidget {
 class _SearchScreensState extends State<SearchScreens> {
   RxBool checklist = true.obs;
   RxBool checkgridview = false.obs;
-  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
-      GlobalKey<SliderDrawerState>();
+  final GlobalKey<SliderDrawerState> _sliderDrawerKey = GlobalKey<SliderDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,8 +128,7 @@ class _SearchScreensState extends State<SearchScreens> {
                                     text: "Not Verified",
                                     fontSize: 10.sp,
                                     fontWeight: FontWeight.w500,
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary)
+                                    color: Theme.of(context).colorScheme.onPrimary)
                               ],
                             ),
                           ),
@@ -155,7 +153,19 @@ class _SearchScreensState extends State<SearchScreens> {
                     ),
                     child: Column(
                       children: [
-                        const CustomRowFieldInDrawer(
+                        CustomRowFieldInDrawer(
+                          ontap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                              ),
+                              builder: (context) {
+                                return const PremiumOptionsContent();
+                              },
+                            );
+                          },
                           icon: Icons.star,
                           name: "Premium Options",
                           color: Colors.yellow,
@@ -163,9 +173,7 @@ class _SearchScreensState extends State<SearchScreens> {
                         CustomRowFieldInDrawer(
                           icon: Icons.visibility,
                           name: "Privacy Options",
-                          color:
-                              Theme.of(context).appBarTheme.iconTheme?.color ??
-                                  Colors.black,
+                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           ontap: () {
@@ -177,23 +185,17 @@ class _SearchScreensState extends State<SearchScreens> {
                           },
                           icon: Icons.settings,
                           name: "Settings",
-                          color:
-                              Theme.of(context).appBarTheme.iconTheme?.color ??
-                                  Colors.black,
+                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.rate_review,
                           name: "Feedback",
-                          color:
-                              Theme.of(context).appBarTheme.iconTheme?.color ??
-                                  Colors.black,
+                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.live_help_rounded,
                           name: "Help",
-                          color:
-                              Theme.of(context).appBarTheme.iconTheme?.color ??
-                                  Colors.black,
+                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
                         ),
                       ],
                     ),
@@ -227,10 +229,7 @@ class _SearchScreensState extends State<SearchScreens> {
                               child: Icon(
                                 Icons.menu,
                                 size: 35,
-                                color: Theme.of(context)
-                                    .appBarTheme
-                                    .iconTheme
-                                    ?.color,
+                                color: Theme.of(context).appBarTheme.iconTheme?.color,
                               ),
                             ),
                             20.horizontalSpace,
@@ -251,27 +250,17 @@ class _SearchScreensState extends State<SearchScreens> {
                                         decoration: BoxDecoration(
                                           boxShadow: [
                                             BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.2),
+                                              color: Colors.black.withOpacity(0.2),
                                               blurRadius: 8,
                                               offset: const Offset(0, 4),
                                             ),
                                           ],
-                                          color: checklist.value
-                                              ? Theme.of(context)
-                                                  .appBarTheme
-                                                  .backgroundColor
-                                              : AppColors.backgroundlight,
+                                          color: checklist.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
                                         ),
                                         child: Icon(
                                           Icons.grid_view,
                                           size: 25,
-                                          color: checklist.value
-                                              ? Colors.blueAccent
-                                              : Theme.of(context)
-                                                  .appBarTheme
-                                                  .iconTheme
-                                                  ?.color,
+                                          color: checklist.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
                                         ),
                                       ),
                                     );
@@ -288,27 +277,17 @@ class _SearchScreensState extends State<SearchScreens> {
                                         decoration: BoxDecoration(
                                           boxShadow: [
                                             BoxShadow(
-                                              color:
-                                                  Colors.black.withOpacity(0.2),
+                                              color: Colors.black.withOpacity(0.2),
                                               blurRadius: 8,
                                               offset: const Offset(0, 4),
                                             ),
                                           ],
-                                          color: checkgridview.value
-                                              ? Theme.of(context)
-                                                  .appBarTheme
-                                                  .backgroundColor
-                                              : AppColors.backgroundlight,
+                                          color: checkgridview.value ? Theme.of(context).appBarTheme.backgroundColor : AppColors.backgroundlight,
                                         ),
                                         child: Icon(
                                           Icons.grid_4x4_rounded,
                                           size: 25,
-                                          color: checkgridview.value
-                                              ? Colors.blueAccent
-                                              : Theme.of(context)
-                                                  .appBarTheme
-                                                  .iconTheme
-                                                  ?.color,
+                                          color: checkgridview.value ? Colors.blueAccent : Theme.of(context).appBarTheme.iconTheme?.color,
                                         ),
                                       ),
                                     );
@@ -326,8 +305,7 @@ class _SearchScreensState extends State<SearchScreens> {
                               const FilterScreen(),
                             );
                           },
-                          child: Icon(Icons.filter_list,
-                              size: 28, color: Colors.grey.shade800),
+                          child: Icon(Icons.filter_list, size: 28, color: Colors.grey.shade800),
                         ),
                       ],
                     ),
@@ -335,8 +313,7 @@ class _SearchScreensState extends State<SearchScreens> {
                 ),
                 10.verticalSpace,
                 AppInput(
-                  thecolourwhichuserwriteintextfield:
-                      Theme.of(context).colorScheme.onPrimary,
+                  thecolourwhichuserwriteintextfield: Theme.of(context).colorScheme.onPrimary,
                   verticalPadding: 10,
                   horizontalMargin: 10,
                   prefixIcon: Icon(
@@ -348,8 +325,7 @@ class _SearchScreensState extends State<SearchScreens> {
                 ),
                 Obx(() {
                   return SizedBox(
-                    height: MediaQuery.of(context).size.height *
-                        0.7, // Set an appropriate height
+                    height: MediaQuery.of(context).size.height * 0.7, // Set an appropriate height
                     child: GridView.builder(
                       itemCount: 6,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

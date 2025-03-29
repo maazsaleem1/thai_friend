@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_icon_button/tap_fill_icon.dart';
@@ -8,6 +10,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:thai_friendly_app/controllers/userdetail_controllers.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
+import 'package:thai_friendly_app/messagefolder/chat_detailed_screen.dart';
 import 'package:thai_friendly_app/onboardingfolder/custom_button.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 
@@ -123,7 +126,10 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
                     ],
                   ),
                   10.verticalSpace,
-                  const AppButton(
+                  AppButton(
+                    onPress: () {
+                      Get.to(() => const ChatDetailedScreen());
+                    },
                     horizontalMargin: 0,
                     text: "Chat With Sai360",
                     backgroundColor: AppColors.orangebackgroundfortextandbutton,
@@ -276,6 +282,48 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
                         minWidth: 170.w,
                       ),
                       AppButton(
+                        onPress: () {
+                          showModalBottomSheet(
+                            context: context,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                            ),
+                            builder: (context) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const AppText(
+                                      text: "Really block this user? - Please tell us why (anonymous):",
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.pinksahdebackground,
+                                    ),
+                                    10.verticalSpace,
+                                    _buildBlockOption(context, "No reason ¯\\_(ツ)_/¯"),
+                                    _buildBlockOption(context, "Bad photos"),
+                                    _buildBlockOption(context, "Bad messages"),
+                                    _buildBlockOption(context, "Spam / Advertising"),
+                                    _buildBlockOption(context, "Fake account"),
+                                    _buildBlockOption(context, "Other reason"),
+                                    const SizedBox(height: 10),
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      width: 1.sw,
+                                      child: TextButton(
+                                        iconAlignment: IconAlignment.start,
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text("  Cancel", style: TextStyle(color: Colors.red)),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                         horizontalMargin: 0,
                         text: "Block",
                         fontweight: FontWeight.w900,
@@ -369,4 +417,20 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
       ),
     );
   }
+}
+
+Widget _buildBlockOption(BuildContext context, String title) {
+  return ListTile(
+    title: AppText(
+      text: title,
+      fontSize: 15,
+      fontWeight: FontWeight.w500,
+      color: AppColors.black,
+    ),
+    onTap: () {
+      // Handle block reason selection here
+      Navigator.pop(context);
+      // Show confirmation or proceed with blocking
+    },
+  );
 }

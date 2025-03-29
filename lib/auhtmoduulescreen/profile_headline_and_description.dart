@@ -87,7 +87,7 @@ class AddProfileAndDescription extends StatelessWidget {
           color: AppColors.pinksahdebackground,
           child: AppButton(
             onPress: () {
-              Get.to(() => const NavBarFamily());
+              Get.to(() => const NavBar());
               // Get.to(() => const WhatIsYourWeightScreen());
             },
             text: "Complete Signup",

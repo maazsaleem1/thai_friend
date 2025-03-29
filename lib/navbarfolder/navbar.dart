@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/EnterAppScreens/search_screens.dart';
 import 'package:thai_friendly_app/allusercardswiperscreen/user_right_left_screen.dart';
+import 'package:thai_friendly_app/controllers/navbar_controler.dart';
 import 'package:thai_friendly_app/menunavbarscreen/all_the_selected_user.dart';
 import 'package:thai_friendly_app/messagefolder/inbox_screen.dart';
 import 'package:thai_friendly_app/profilefolder/profile_view.dart';
 
-class NavBarFamily extends StatefulWidget {
-  const NavBarFamily({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
-  State<NavBarFamily> createState() => _NavBarFamilyState();
+  State<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarFamilyState extends State<NavBarFamily> {
+class _NavBarState extends State<NavBar> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-  RxInt count = 0.obs;
+  final navbarcontroller = Get.put(NavbarController()); // ✅ Correctly using GetX
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +44,17 @@ class _NavBarFamilyState extends State<NavBarFamily> {
           ],
         ),
       ),
-      body: Obx(() => screens[count.value]), // Reactive UI update
+      body: Obx(() => screens[navbarcontroller.count.value]), // ✅ Correctly updates UI
     );
   }
 
   Widget _buildNavItem(IconData icon, int index) {
     return GestureDetector(
       onTap: () {
-        count.value = index; // Updating GetX state
+        navbarcontroller.itemSelect(index); // ✅ Now updating correct variable
       },
       child: Obx(() {
-        bool isActive = index == count.value;
+        bool isActive = index == navbarcontroller.count.value; // ✅ Correct state check
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
