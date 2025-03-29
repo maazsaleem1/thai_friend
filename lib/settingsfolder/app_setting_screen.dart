@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:thai_friendly_app/allusercardswiperscreen/user_right_left_screen.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 import 'package:thai_friendly_app/settingsfolder/change_usrename_screen.dart';

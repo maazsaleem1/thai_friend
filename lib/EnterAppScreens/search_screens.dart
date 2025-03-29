@@ -301,6 +301,7 @@ class _SearchScreensState extends State<SearchScreens> {
                         GestureDetector(
                           onTap: () {
                             Get.bottomSheet(
+                              ignoreSafeArea: true,
                               enableDrag: false,
                               isScrollControlled: true,
                               const FilterScreen(),

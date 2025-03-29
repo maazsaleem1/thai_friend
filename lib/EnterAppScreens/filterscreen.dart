@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:thai_friendly_app/EnterAppScreens/select_gender_selection_screen.dart';
+import 'package:thai_friendly_app/customs_widgets/app_text.dart';
+import 'package:thai_friendly_app/res/appcolors.dart';
+import 'package:flutter_xlider/flutter_xlider.dart';
 
 class FilterScreen extends StatefulWidget {
   const FilterScreen({super.key});
@@ -9,172 +15,667 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   double _startAge = 18;
+  double _distance = 109;
+  double _minDistance = 0;
+  double _maxDistance = 300;
   double _endAge = 28;
   bool verifiedPhotosOnly = false;
   bool excludeMessaged = false;
   bool showLikedMe = false;
-  int selectedSearchOption = 2; // Default: Search by City/Place
+  int selectedSearchOption = 0; // Default: Search by City/Place
+  double _minAge = 18;
+  double _maxAge = 33;
+  RxInt selectedIndex = 0.obs;
+  double _startHeight = 120;
+  double _endHeight = 200;
+  double _minHeight = 100;
+  double _maxHeight = 220;
+  double _startWeight = 30;
+  double _endWeight = 125;
+  double _minWeight = 20;
+  double _maxWeight = 150;
 
+  RxInt premiumselectedIndex = 0.obs;
+  final List<String> tabs = ["ONLINE", "TODAY", "THISWEEK", "ANYTIME"];
+  final List<String> premium = ["ALL MEMBERS", "NEW", "HOT"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text(
-            "Close",
-            style: TextStyle(color: Colors.blue, fontSize: 18),
-          ),
-        ),
-        title: const Text(
-          "Search Settings",
-          style: TextStyle(
-              color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        child: ListView(
+      backgroundColor: AppColors.backgroundlight,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 10),
-            // Gender Selection
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Gender", style: TextStyle(fontSize: 16)),
-                Text("Transgender",
-                    style: TextStyle(fontSize: 16, color: Colors.black54)),
-              ],
-            ),
-            const Divider(),
-
-            // Age Range Slider
-            const SizedBox(height: 10),
-            const Text("Age Range",
-                style: TextStyle(fontSize: 16, color: Colors.black54)),
-            SliderTheme(
-              data: SliderTheme.of(context).copyWith(
-                rangeThumbShape:
-                    const RoundRangeSliderThumbShape(enabledThumbRadius: 8),
+            // 30.verticalSpace,
+            Container(
+              height: 80.h,
+              decoration: BoxDecoration(
+                color: Theme.of(context).appBarTheme.backgroundColor,
               ),
-              child: RangeSlider(
-                values: RangeValues(_startAge, _endAge),
-                min: 18,
-                max: 60,
-                divisions: 42,
-                labels:
-                    RangeLabels("${_startAge.toInt()}", "${_endAge.toInt()}"),
-                onChanged: (RangeValues values) {
-                  setState(() {
-                    _startAge = values.start;
-                    _endAge = values.end;
-                  });
-                },
-              ),
-            ),
-            Text("${_startAge.toInt()}-${_endAge.toInt()}",
-                textAlign: TextAlign.right,
-                style: const TextStyle(fontSize: 16)),
-
-            const SizedBox(height: 10),
-            // Verified Photos Only
-            SwitchListTile(
-              title: const Text("Verified Photos Only"),
-              value: verifiedPhotosOnly,
-              onChanged: (bool value) {
-                setState(() {
-                  verifiedPhotosOnly = value;
-                });
-              },
-              activeColor: Colors.blue,
-            ),
-            // Exclude Messaged Already
-            SwitchListTile(
-              title: const Text("Exclude messaged already"),
-              value: excludeMessaged,
-              onChanged: (bool value) {
-                setState(() {
-                  excludeMessaged = value;
-                });
-              },
-              activeColor: Colors.blue,
-            ),
-            // Show only who liked me
-            SwitchListTile(
-              title: const Text("Show only who liked me"),
-              value: showLikedMe,
-              onChanged: (bool value) {
-                setState(() {
-                  showLikedMe = value;
-                });
-              },
-              activeColor: Colors.blue,
-            ),
-
-            const SizedBox(height: 10),
-            // Time Selection Tabs
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _timeFilterButton("ONLINE NOW"),
-                _timeFilterButton("TODAY"),
-                _timeFilterButton("THIS WEEK"),
-                _timeFilterButton("ANYTIME"),
-              ],
-            ),
-
-            SizedBox(height: 20),
-            // Search Options
-            _searchOption(0, "Search Near Me"),
-            _searchOption(1, "Search Everywhere"),
-            _searchOption(2, "Search by City / Place"),
-
-            if (selectedSearchOption == 2) ...[
-              const SizedBox(height: 10),
-              const Text("Pattaya",
-                  style: TextStyle(fontSize: 16, color: Colors.black)),
-              SizedBox(height: 10),
-              // Map Placeholder
-              Container(
-                height: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: AssetImage("assets/map_placeholder.png"),
-                    fit: BoxFit.cover,
-                  ),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10, left: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    const AppText(
+                      text: "Close",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.blue,
+                    ),
+                    30.horizontalSpace,
+                    const AppText(
+                      text: "Search Settings",
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ],
                 ),
               ),
-            ]
+            ),
+            35.verticalSpace,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Gender",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(const GenderSelectionScreen());
+                        },
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Women",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.2),
+                    thickness: 1,
+                  ),
+                  const SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Age Range",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                      AppText(
+                        text: "${_startAge.toInt()}-${_endAge.toInt()}",
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  FlutterSlider(
+                    handlerHeight: 18, // Smaller thumb height
+                    handlerWidth: 18,
+                    values: [_startAge, _endAge],
+                    rangeSlider: true,
+                    min: _minAge,
+                    max: _maxAge,
+                    handler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                      ),
+                    ),
+                    rightHandler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                          // padding: const EdgeInsets.all(10),
+                          ),
+                    ),
+                    trackBar: const FlutterSliderTrackBar(
+                      activeTrackBarHeight: 1,
+                      activeTrackBar: BoxDecoration(color: Colors.blue),
+                      inactiveTrackBar: BoxDecoration(color: Colors.grey),
+                    ),
+                    tooltip: FlutterSliderTooltip(
+                      textStyle: const TextStyle(color: Colors.white),
+                      boxStyle: FlutterSliderTooltipBox(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                    onDragging: (handlerIndex, lowerValue, upperValue) {
+                      setState(() {
+                        _startAge = lowerValue;
+                        _endAge = upperValue;
+                      });
+                    },
+                  ),
+                  10.verticalSpace,
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeColor: Colors.blue,
+                    value: verifiedPhotosOnly,
+                    onChanged: (val) => setState(() => verifiedPhotosOnly = val),
+                    title: AppText(
+                      text: "Verified Photos Only",
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeColor: Colors.blue,
+                    value: excludeMessaged,
+                    onChanged: (val) => setState(() => excludeMessaged = val),
+                    title: AppText(
+                      text: "Exclude messaged already",
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  10.verticalSpace,
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeColor: Colors.blue,
+                    value: showLikedMe,
+                    onChanged: (val) => setState(() => showLikedMe = val),
+                    title: AppText(
+                      text: "Show only who liked me",
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.black,
+                    ),
+                  ),
+                  20.verticalSpace,
+                  _buildTabBar(),
+                  const SizedBox(height: 20),
+                  _searchOption(0, "Search Near Me"),
+                  _searchOption(1, "Search Everywhere"),
+                  _searchOption(2, "Search by City / Place"),
+                  if (selectedSearchOption == 2) ...[
+                    const SizedBox(height: 10),
+                    const AppText(textalignment: TextAlign.left, text: "Pattaya", fontSize: 15, fontWeight: FontWeight.w300, color: AppColors.black),
+                    const SizedBox(height: 10),
+                    // Map Placeholder
+                    Container(
+                      height: 150,
+                      width: Get.width * 0.9,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: const DecorationImage(
+                          image: AssetImage("assets/images/download.jpeg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ],
+                  25.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Distance",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                      AppText(
+                        text: "${_distance.toInt()} km",
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  FlutterSlider(
+                    handlerHeight: 18, // Smaller thumb height
+                    handlerWidth: 18,
+                    values: [_distance],
+                    min: _minDistance,
+                    max: _maxDistance,
+                    handler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                      ),
+                    ),
+                    rightHandler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    trackBar: FlutterSliderTrackBar(
+                      activeTrackBar: BoxDecoration(color: Colors.blue, borderRadius: BorderRadius.circular(5)),
+                      inactiveTrackBar: const BoxDecoration(color: Colors.grey),
+                    ),
+                    onDragging: (handlerIndex, lowerValue, upperValue) {
+                      setState(() {
+                        _distance = lowerValue;
+                      });
+                    },
+                  ),
+                  50.verticalSpace,
+                  const AppText(
+                    textalignment: TextAlign.left,
+                    text: "Premium Search",
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    color: AppColors.black,
+                  ),
+                  20.verticalSpace,
+                  premiumtabbar(),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Height",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                      AppText(
+                        text: "${_startHeight.toInt()} - ${_endHeight.toInt()} cm",
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  FlutterSlider(
+                    handlerHeight: 18, // Smaller thumb height
+                    handlerWidth: 18,
+                    values: [_startHeight, _endHeight],
+                    rangeSlider: true,
+                    min: _minHeight,
+                    max: _maxHeight,
+                    handler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                      ),
+                    ),
+                    rightHandler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                          // padding: const EdgeInsets.all(10),
+                          ),
+                    ),
+                    trackBar: const FlutterSliderTrackBar(
+                      activeTrackBarHeight: 1,
+                      activeTrackBar: BoxDecoration(color: Colors.blue),
+                      inactiveTrackBar: BoxDecoration(color: Colors.grey),
+                    ),
+                    tooltip: FlutterSliderTooltip(
+                      textStyle: const TextStyle(color: Colors.white),
+                      boxStyle: FlutterSliderTooltipBox(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                    onDragging: (handlerIndex, lowerValue, upperValue) {
+                      setState(() {
+                        _startHeight = lowerValue;
+                        _endHeight = upperValue;
+                      });
+                    },
+                  ),
+                  40.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Weight",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                      AppText(
+                        text: "${_startWeight.toInt()} - ${_endWeight.toInt()} kg",
+                        fontSize: 17,
+                        fontWeight: FontWeight.w300,
+                        color: AppColors.black,
+                      ),
+                    ],
+                  ),
+                  10.verticalSpace,
+                  FlutterSlider(
+                    handlerHeight: 18, // Smaller thumb height
+                    handlerWidth: 18,
+                    values: [_startWeight, _endWeight],
+                    rangeSlider: true,
+                    min: _minWeight,
+                    max: _maxWeight,
+                    handler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                      ),
+                    ),
+                    rightHandler: FlutterSliderHandler(
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Container(
+                          // padding: const EdgeInsets.all(10),
+                          ),
+                    ),
+                    trackBar: const FlutterSliderTrackBar(
+                      activeTrackBarHeight: 1,
+                      activeTrackBar: BoxDecoration(color: Colors.blue),
+                      inactiveTrackBar: BoxDecoration(color: Colors.grey),
+                    ),
+                    tooltip: FlutterSliderTooltip(
+                      textStyle: const TextStyle(color: Colors.white),
+                      boxStyle: FlutterSliderTooltipBox(
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                    onDragging: (handlerIndex, lowerValue, upperValue) {
+                      setState(() {
+                        _startWeight = lowerValue;
+                        _endWeight = upperValue;
+                      });
+                    },
+                  ),
+                  40.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "No Children",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Any",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.2),
+                    thickness: 1,
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Wants Children",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Any",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.2),
+                    thickness: 1,
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Education",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Any",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.2),
+                    thickness: 1,
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "English Language Ability",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Any",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: Colors.black.withOpacity(0.2),
+                    thickness: 1,
+                  ),
+                  10.verticalSpace,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const AppText(
+                        text: "Respect Their Age Range",
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Row(
+                          children: [
+                            const AppText(
+                              text: "Any",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w300,
+                              color: AppColors.black,
+                            ),
+                            10.horizontalSpace,
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                              color: Colors.black.withOpacity(0.4),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  50.verticalSpace,
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  // Time Filter Button
-  Widget _timeFilterButton(String title) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-        decoration: BoxDecoration(
-          color: Colors.grey[200],
-          borderRadius: BorderRadius.circular(20),
+  Widget _buildTabBar() {
+    return Obx(() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+          tabs.length,
+          (index) => _buildTabItem(tabs[index], index, false),
         ),
-        child: Text(title, style: TextStyle(fontSize: 14)),
+      );
+    });
+  }
+
+  Widget premiumtabbar() {
+    return Obx(() {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: List.generate(
+          premium.length,
+          (index) => _buildTabItem(premium[index], index, true),
+        ),
+      );
+    });
+  }
+
+  Widget _buildTabItem(String title, int index, bool isfrom) {
+    return GestureDetector(
+      onTap: () => selectedIndex.value = index,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 40.h,
+            width: isfrom ? Get.width * 0.29 : Get.width * 0.21,
+            child: Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.bold,
+                  color: selectedIndex.value == index ? AppColors.orangebackgroundfortextandbutton : AppColors.pinksahdebackground,
+                ),
+              ),
+            ),
+          ),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: 3.h,
+            width: selectedIndex.value == index ? Get.width * 0.2 : 0,
+            color: selectedIndex.value == index ? AppColors.pinksahdebackground : Colors.transparent,
+          ),
+        ],
       ),
     );
   }
 
+  // Time Filter Button
+
   // Search Option Radio Button
   Widget _searchOption(int value, String text) {
     return RadioListTile(
-      title: Text(text),
+      contentPadding: EdgeInsets.zero,
+      title: AppText(text: text, fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.black),
       value: value,
       groupValue: selectedSearchOption,
       onChanged: (int? newValue) {
