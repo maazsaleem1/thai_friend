@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/EnterAppScreens/detailed_screen.dart';
+import 'package:thai_friendly_app/EnterAppScreens/filterscreen.dart';
 import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
