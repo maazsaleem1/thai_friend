@@ -7,7 +7,6 @@ import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
 
 class PrivacyScreen extends StatelessWidget {
-
   final List<Widget> screens = [
     _blockedUsersTab(),
     _hiddenUsersTab(),

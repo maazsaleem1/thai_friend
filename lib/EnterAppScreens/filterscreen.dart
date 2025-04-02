@@ -15,10 +15,10 @@ class FilterScreen extends StatefulWidget {
 
 class _FilterScreenState extends State<FilterScreen> {
   double _startAge = 18;
+  double _endAge = 28;
   double _distance = 109;
   double _minDistance = 0;
   double _maxDistance = 300;
-  double _endAge = 28;
   bool verifiedPhotosOnly = false;
   bool excludeMessaged = false;
   bool showLikedMe = false;
