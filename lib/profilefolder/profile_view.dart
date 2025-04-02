@@ -309,13 +309,13 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: details.value ? AppColors.white : Colors.transparent,
-                                    child: const Center(
+                                    color: details.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    child: Center(
                                       child: AppText(
                                         text: "DETAILS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: details.value ? AppColors.white : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -331,13 +331,13 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: photos.value ? AppColors.white : Colors.transparent,
-                                    child: const Center(
+                                    color: photos.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    child: Center(
                                       child: AppText(
                                         text: "PHOTOS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: photos.value ? AppColors.white : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -353,13 +353,13 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: reviews.value ? AppColors.white : Colors.transparent,
-                                    child: const Center(
+                                    color: reviews.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    child: Center(
                                       child: AppText(
                                         text: "REVIEWS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black,
+                                        color: reviews.value ? AppColors.white : Colors.black,
                                       ),
                                     ),
                                   ),

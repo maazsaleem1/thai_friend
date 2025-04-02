@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/messagefolder/chat_detailed_screen.dart';
+import 'package:thai_friendly_app/res/appcolors.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -10,8 +11,9 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateMixin {
-  late TabController _tabController;
+class _ChatScreenState extends State<ChatScreen> {
+  final RxInt selectedIndex = 0.obs; // Observable for tab selection
+  final List<String> tabs = ["Unread", "Inbox", "Outbox"];
 
   final List<Map<String, dynamic>> chatList = [
     {
@@ -65,46 +67,28 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.backgroundlight,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
         child: AppBar(
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.white,
+
+          // backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
           elevation: 0,
-          bottom: TabBar(
-            controller: _tabController,
-            labelColor: Theme.of(context).colorScheme.onPrimary,
-            unselectedLabelColor: Colors.grey,
-            indicator: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(10),
-              boxShadow: const [
-                BoxShadow(color: Colors.black26, blurRadius: 4),
-              ],
-            ),
-            tabs: const [
-              Tab(text: "   UNREAD    "),
-              Tab(text: "   INBOX     "),
-              Tab(text: "   OUTBOX    "),
-            ],
-          ),
+          title: _buildTabBar(),
         ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          _buildChatList(),
-          _buildChatList(),
-          _buildChatList(),
-        ],
-      ),
+      body: Obx(() => IndexedStack(
+            index: selectedIndex.value,
+            children: [
+              _buildChatList(),
+              _buildChatList(),
+              _buildChatList(),
+            ],
+          )),
     );
   }
 
@@ -117,7 +101,7 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
 
         return GestureDetector(
           onTap: () {
-            Get.to(() => ChatDetailedScreen());
+            Get.to(() => const ChatDetailedScreen());
           },
           child: ListTile(
             leading: SizedBox(
@@ -160,5 +144,38 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
         );
       },
     );
+  }
+
+  Widget _buildTabBar() {
+    return Obx(() => Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: List.generate(
+            tabs.length,
+            (index) => GestureDetector(
+              onTap: () {
+                selectedIndex.value = index;
+              },
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    tabs[index],
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: selectedIndex.value == index ? AppColors.orangebackgroundfortextandbutton : AppColors.pinksahdebackground,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Container(
+                    height: 3,
+                    width: 80,
+                    color: selectedIndex.value == index ? AppColors.orangebackgroundfortextandbutton : Colors.transparent,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 }

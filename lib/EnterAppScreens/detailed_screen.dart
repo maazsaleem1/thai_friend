@@ -350,7 +350,10 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
                     Container(
                       height: 45,
                       width: 90,
-                      color: AppColors.white,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        border: Border.all(color: AppColors.pinksahdebackground, width: 1),
+                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -367,7 +370,10 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
                     Container(
                       height: 45,
                       width: 90,
-                      color: AppColors.white,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        border: Border.all(color: AppColors.pinksahdebackground, width: 1),
+                      ),
                       child: const Column(
                         children: [
                           Center(
@@ -390,7 +396,10 @@ class _DetailedUserScreenState extends State<DetailedUserScreen> {
                     Container(
                       height: 45,
                       width: 90,
-                      color: AppColors.white,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        border: Border.all(color: AppColors.pinksahdebackground, width: 1),
+                      ),
                       child: const Column(
                         children: [
                           Center(

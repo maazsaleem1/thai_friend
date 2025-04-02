@@ -57,11 +57,16 @@ class _FilterScreenState extends State<FilterScreen> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const AppText(
-                      text: "Close",
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.blue,
+                    GestureDetector(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: const AppText(
+                        text: "Close",
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.blue,
+                      ),
                     ),
                     30.horizontalSpace,
                     const AppText(
