@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:get/get.dart';
+import 'package:thai_friendly_app/customs_widgets/app_input_field.dart';
 import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
+import 'package:thai_friendly_app/res/fancy%20textffield.dart';
 import 'package:thai_friendly_app/settingsfolder/privacycontroller.dart';
 
 class PremiumOptionsContent extends StatefulWidget {
@@ -43,57 +45,9 @@ class PremiumOptionsContentState extends State<PremiumOptionsContent> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const AppText(
-                      text: "Features",
+                      text: "Auto message Like",
                       fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black),
-                  const SizedBox(height: 10),
-                  const AppText(
-                      text:
-                          "Your messages will appear at the top of recipients inboxes - ahead of free members messages. This greatly increases your chance of a reply.",
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                  SwitchListTile(
-                    activeColor: Colors.blue,
-                    title: const Row(
-                      children: [
-                        Icon(Icons.email, color: Colors.blue),
-                        SizedBox(width: 8),
-                        AppText(
-                            text: "Message Priority",
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black),
-                      ],
-                    ),
-                    value: messagePriority,
-                    onChanged: (value) {
-                      setState(() => messagePriority = value);
-                    },
-                  ),
-                  5.verticalSpace,
-                  const Divider(),
-                  5.verticalSpace,
-                  const AppText(
-                      text: "Privacy",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.black),
-                  const SizedBox(height: 20),
-                  const AppText(
-                      text:
-                          "Privacy options for premium members have moved to the privacy section in the sidebar",
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: Colors.black),
-                  10.verticalSpace,
-                  const Divider(),
-                  10.verticalSpace,
-                  const AppText(
-                      text: "Experimental Features",
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
+                      fontWeight: FontWeight.w700,
                       color: Colors.black),
                   const SizedBox(height: 20),
                   const AppText(
@@ -128,13 +82,66 @@ class PremiumOptionsContentState extends State<PremiumOptionsContent> {
                       fontWeight: FontWeight.w400,
                       color: Colors.black),
                   const SizedBox(height: 8),
-                  TextField(
-                    controller: messageController,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
+                  // AppInput(
+                  //   hintstylecolour: AppColors.black.withOpacity(0.7),
+                  //   placeHolder: "Hi my name is ....",
+                  //   backColor: AppColors.white,
+                  //   horizontalMargin: 0,
+                  //   verticalPadding: 20,
+                  //   maxLenght: 5,
+                  //   maxLines: 5,
+                  // ),
+                  FancyTextField(),
+                  // TextField(
+                  //   controller: messageController,
+                  //   decoration: const InputDecoration(
+                  //     border: OutlineInputBorder(),
+                  //   ),
+                  // ),
                   20.verticalSpace,
+                  5.verticalSpace,
+                  const Divider(),
+                  5.verticalSpace,
+                  const AppText(
+                      text: "Privacy",
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
+                  const SizedBox(height: 20),
+                  // const AppText(
+                  //     text:
+                  //         "Privacy options for premium members have moved to the privacy section in the sidebar",
+                  //     fontSize: 13,
+                  //     fontWeight: FontWeight.w400,
+                  //     color: Colors.black),
+                  // 10.verticalSpace,
+                  // const Divider(),
+                  // 10.verticalSpace,
+
+                  const AppText(
+                      text:
+                          "Your messages will appear at the top of recipients inboxes - ahead of free members messages. This greatly increases your chance of a reply.",
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black),
+                  SwitchListTile(
+                    activeColor: Colors.blue,
+                    title: const Row(
+                      children: [
+                        Icon(Icons.email, color: Colors.blue),
+                        SizedBox(width: 8),
+                        AppText(
+                            text: "Message Priority",
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ],
+                    ),
+                    value: messagePriority,
+                    onChanged: (value) {
+                      setState(() => messagePriority = value);
+                    },
+                  ),
                   premiumFeature('Show Me in Search', showMeInSearch, (value) {
                     setState(() => showMeInSearch = value);
                   }),
@@ -296,7 +303,7 @@ class PremiumOptionsContentState extends State<PremiumOptionsContent> {
                 )),
           ],
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     );
   }
