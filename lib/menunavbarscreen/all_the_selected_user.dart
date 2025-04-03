@@ -8,15 +8,20 @@ import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_card_of_the_user.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_row_fields.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
+import 'package:thai_friendly_app/settingsfolder/premium_options.dart';
+import 'package:thai_friendly_app/settingsfolder/privacy_opton_screen.dart';
+import 'package:thai_friendly_app/settingsfolder/setting_screen.dart';
 
 class SelectedUsersShowsHereScreen extends StatefulWidget {
   const SelectedUsersShowsHereScreen({super.key});
 
   @override
-  State<SelectedUsersShowsHereScreen> createState() => _SelectedUsersShowsHereScreenState();
+  State<SelectedUsersShowsHereScreen> createState() =>
+      _SelectedUsersShowsHereScreenState();
 }
 
-class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScreen> {
+class _SelectedUsersShowsHereScreenState
+    extends State<SelectedUsersShowsHereScreen> {
   final List<String> menuItems = [
     "Visited Me",
     "Liked Me",
@@ -36,7 +41,8 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
   ];
   RxBool checklist = true.obs;
   RxBool checkgridview = false.obs;
-  final GlobalKey<SliderDrawerState> _sliderDrawerKey = GlobalKey<SliderDrawerState>();
+  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
+      GlobalKey<SliderDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,7 +133,8 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                                     text: "Not Verified",
                                     fontSize: 10.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.onPrimary)
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary)
                               ],
                             ),
                           ),
@@ -152,30 +159,71 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                     ),
                     child: Column(
                       children: [
-                        const CustomRowFieldInDrawer(
+                        CustomRowFieldInDrawer(
+                          ontap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16)),
+                              ),
+                              builder: (context) {
+                                return const PremiumOptionsContent();
+                              },
+                            );
+                          },
                           icon: Icons.star,
                           name: "Premium Options",
                           color: Colors.yellow,
                         ),
                         CustomRowFieldInDrawer(
+                          ontap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16)),
+                              ),
+                              builder: (context) {
+                                return const PrivacyOptionsScreen();
+                              },
+                            );
+                          },
                           icon: Icons.visibility,
                           name: "Privacy Options",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
+                          ontap: () {
+                            Get.bottomSheet(
+                              enableDrag: false,
+                              isScrollControlled: true,
+                              const SettingScreen(),
+                            );
+                          },
                           icon: Icons.settings,
                           name: "Settings",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.rate_review,
                           name: "Feedback",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.live_help_rounded,
                           name: "Help",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                       ],
                     ),
@@ -209,7 +257,10 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                               child: Icon(
                                 Icons.menu,
                                 size: 35,
-                                color: Theme.of(context).appBarTheme.iconTheme?.color,
+                                color: Theme.of(context)
+                                    .appBarTheme
+                                    .iconTheme
+                                    ?.color,
                               ),
                             ),
                             20.horizontalSpace,
@@ -232,7 +283,9 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                                     children: [
                                       Text(
                                         "Matches",
-                                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Icon(
                                         Icons.keyboard_arrow_down_rounded,
@@ -252,7 +305,8 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                 ),
                 10.verticalSpace,
                 AppInput(
-                  thecolourwhichuserwriteintextfield: Theme.of(context).colorScheme.onPrimary,
+                  thecolourwhichuserwriteintextfield:
+                      Theme.of(context).colorScheme.onPrimary,
                   verticalPadding: 10,
                   horizontalMargin: 10,
                   prefixIcon: Icon(
@@ -274,14 +328,16 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(color: Colors.blue),
-                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 12),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                             ),
                           ),
                           child: Text(
                             text,
-                            style: const TextStyle(color: Colors.blue, fontSize: 16),
+                            style: const TextStyle(
+                                color: Colors.blue, fontSize: 16),
                           ),
                         );
                       }).toList(),
@@ -291,7 +347,8 @@ class _SelectedUsersShowsHereScreenState extends State<SelectedUsersShowsHereScr
                 Obx(() {
                   return Expanded(
                     child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.7, // Set an appropriate height
+                      height: MediaQuery.of(context).size.height *
+                          0.7, // Set an appropriate height
                       child: GridView.builder(
                         itemCount: 6,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

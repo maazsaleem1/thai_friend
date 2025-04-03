@@ -10,6 +10,9 @@ import 'package:thai_friendly_app/customs_widgets/app_text.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_fields_in_profile.dart';
 import 'package:thai_friendly_app/customs_widgets/custom_row_fields.dart';
 import 'package:thai_friendly_app/res/appcolors.dart';
+import 'package:thai_friendly_app/settingsfolder/premium_options.dart';
+import 'package:thai_friendly_app/settingsfolder/privacy_opton_screen.dart';
+import 'package:thai_friendly_app/settingsfolder/setting_screen.dart';
 
 class ProfileViewScreens extends StatefulWidget {
   const ProfileViewScreens({super.key});
@@ -31,13 +34,15 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
     'assets/images/girlfour.jpg',
   ];
   int currentindex = 0; // For tracking current slide index
-  CarouselSliderController buttonCarouselController = CarouselSliderController();
+  CarouselSliderController buttonCarouselController =
+      CarouselSliderController();
   final controller = Get.put(UserdetailControllers());
 
   final List<String> imageUrls = [
     'assets/images/girloneimage.jpg',
   ];
-  final GlobalKey<SliderDrawerState> _sliderDrawerKey = GlobalKey<SliderDrawerState>();
+  final GlobalKey<SliderDrawerState> _sliderDrawerKey =
+      GlobalKey<SliderDrawerState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +142,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                     text: "Not Verified",
                                     fontSize: 10.sp,
                                     fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.onPrimary)
+                                    color:
+                                        Theme.of(context).colorScheme.onPrimary)
                               ],
                             ),
                           ),
@@ -162,30 +168,71 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                     ),
                     child: Column(
                       children: [
-                        const CustomRowFieldInDrawer(
+                        CustomRowFieldInDrawer(
+                          ontap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16)),
+                              ),
+                              builder: (context) {
+                                return const PremiumOptionsContent();
+                              },
+                            );
+                          },
                           icon: Icons.star,
                           name: "Premium Options",
                           color: Colors.yellow,
                         ),
                         CustomRowFieldInDrawer(
+                          ontap: () {
+                            showModalBottomSheet(
+                              context: context,
+                              isScrollControlled: true,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16)),
+                              ),
+                              builder: (context) {
+                                return const PrivacyOptionsScreen();
+                              },
+                            );
+                          },
                           icon: Icons.visibility,
                           name: "Privacy Options",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
+                          ontap: () {
+                            Get.bottomSheet(
+                              enableDrag: false,
+                              isScrollControlled: true,
+                              const SettingScreen(),
+                            );
+                          },
                           icon: Icons.settings,
                           name: "Settings",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.rate_review,
                           name: "Feedback",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                         CustomRowFieldInDrawer(
                           icon: Icons.live_help_rounded,
                           name: "Help",
-                          color: Theme.of(context).appBarTheme.iconTheme?.color ?? Colors.black,
+                          color:
+                              Theme.of(context).appBarTheme.iconTheme?.color ??
+                                  Colors.black,
                         ),
                       ],
                     ),
@@ -217,7 +264,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                           child: Icon(
                             Icons.menu,
                             size: 35,
-                            color: Theme.of(context).appBarTheme.iconTheme?.color,
+                            color:
+                                Theme.of(context).appBarTheme.iconTheme?.color,
                           ),
                         ),
                       ],
@@ -237,7 +285,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                             children: [
                               const CircleAvatar(
                                 radius: 50,
-                                backgroundImage: AssetImage("assets/images/thaiboy.jpg"),
+                                backgroundImage:
+                                    AssetImage("assets/images/thaiboy.jpg"),
                               ),
                               const SizedBox(width: 12),
                               Expanded(
@@ -258,7 +307,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                     ),
                                     const SizedBox(height: 5),
                                     Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
                                       decoration: BoxDecoration(
                                         color: AppColors.white,
                                         borderRadius: BorderRadius.circular(5),
@@ -266,7 +316,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                       child: const Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          Icon(Icons.verified, color: Colors.grey, size: 14),
+                                          Icon(Icons.verified,
+                                              color: Colors.grey, size: 14),
                                           SizedBox(width: 4),
                                           AppText(
                                             text: "Not Verified",
@@ -309,13 +360,17 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: details.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    color: details.value
+                                        ? AppColors.pinksahdebackground
+                                        : Colors.transparent,
                                     child: Center(
                                       child: AppText(
                                         text: "DETAILS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: details.value ? AppColors.white : Colors.black,
+                                        color: details.value
+                                            ? AppColors.white
+                                            : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -331,13 +386,17 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: photos.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    color: photos.value
+                                        ? AppColors.pinksahdebackground
+                                        : Colors.transparent,
                                     child: Center(
                                       child: AppText(
                                         text: "PHOTOS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: photos.value ? AppColors.white : Colors.black,
+                                        color: photos.value
+                                            ? AppColors.white
+                                            : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -353,13 +412,17 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   child: Container(
                                     height: 40,
                                     width: Get.width * 0.3,
-                                    color: reviews.value ? AppColors.pinksahdebackground : Colors.transparent,
+                                    color: reviews.value
+                                        ? AppColors.pinksahdebackground
+                                        : Colors.transparent,
                                     child: Center(
                                       child: AppText(
                                         text: "REVIEWS",
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: reviews.value ? AppColors.white : Colors.black,
+                                        color: reviews.value
+                                            ? AppColors.white
+                                            : Colors.black,
                                       ),
                                     ),
                                   ),
@@ -375,7 +438,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
                                   child: Container(
                                     padding: const EdgeInsets.all(12),
                                     decoration: BoxDecoration(
@@ -384,9 +448,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                     child: const Column(
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           children: [
-                                            Icon(Icons.verified, color: Colors.blue),
+                                            Icon(Icons.verified,
+                                                color: Colors.blue),
                                             AppText(
                                               text: "Verify My Photos",
                                               fontSize: 16,
@@ -398,7 +464,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                         SizedBox(height: 4),
                                         AppText(
                                           textalignment: TextAlign.center,
-                                          text: "Get a verified badge for your profile to show other \n members your photos are real!",
+                                          text:
+                                              "Get a verified badge for your profile to show other \n members your photos are real!",
                                           fontSize: 12,
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
@@ -411,10 +478,12 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           AppText(
                                             text: "JohnHardy89 🇺🇸",
@@ -426,7 +495,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                             text: "30 / M / Pattaya, Thailand",
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
-                                            color: AppColors.pinksahdebackground,
+                                            color:
+                                                AppColors.pinksahdebackground,
                                           ),
                                         ],
                                       ),
@@ -441,13 +511,16 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           AppText(
-                                            text: "Looking for fun while i am in\nThailand",
+                                            text:
+                                                "Looking for fun while i am in\nThailand",
                                             fontSize: 25,
                                             fontWeight: FontWeight.bold,
                                             color: AppColors.black,
@@ -465,17 +538,21 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           AppText(
                                             textalignment: TextAlign.start,
-                                            text: "Looking for transgender\naged between 23 and 30",
+                                            text:
+                                                "Looking for transgender\naged between 23 and 30",
                                             fontSize: 17,
                                             fontWeight: FontWeight.w900,
-                                            color: AppColors.pinksahdebackground,
+                                            color:
+                                                AppColors.pinksahdebackground,
                                           ),
                                         ],
                                       ),
@@ -493,9 +570,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -505,9 +584,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -517,9 +598,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -529,9 +612,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -541,9 +626,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -553,9 +640,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                 ),
                                 5.verticalSpace,
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
                                   child: Divider(
-                                    color: AppColors.pinksahdebackground.withOpacity(0.5),
+                                    color: AppColors.pinksahdebackground
+                                        .withOpacity(0.5),
                                   ),
                                 ),
                                 5.verticalSpace,
@@ -574,7 +663,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     child: Container(
                                       padding: const EdgeInsets.all(12),
                                       decoration: BoxDecoration(
@@ -583,9 +673,11 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                       child: const Column(
                                         children: [
                                           Row(
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Icon(Icons.verified, color: Colors.blue),
+                                              Icon(Icons.verified,
+                                                  color: Colors.blue),
                                               AppText(
                                                 text: "Verify My Photos",
                                                 fontSize: 16,
@@ -597,7 +689,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                           SizedBox(height: 4),
                                           AppText(
                                             textalignment: TextAlign.center,
-                                            text: "Get a verified badge for your profile to show other \n members your photos are real!",
+                                            text:
+                                                "Get a verified badge for your profile to show other \n members your photos are real!",
                                             fontSize: 12,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.black,
@@ -612,13 +705,15 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                     child: SizedBox(
                                       height: 290.h,
                                       child: ReorderableGridView.builder(
-                                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 3, // 3 columns
                                           mainAxisSpacing: 8,
                                           crossAxisSpacing: 8,
                                           childAspectRatio: 1, // Square items
                                         ),
-                                        itemCount: imagePaths.length + 2, // 4 images + 2 "Add" buttons
+                                        itemCount: imagePaths.length +
+                                            2, // 4 images + 2 "Add" buttons
                                         itemBuilder: (context, index) {
                                           if (index < imagePaths.length) {
                                             return _buildImageItem(index);
@@ -628,10 +723,13 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                         },
                                         onReorder: (oldIndex, newIndex) {
                                           // Ensure we are moving only actual images, not the "Add" button
-                                          if (oldIndex >= imagePaths.length || newIndex >= imagePaths.length) return;
+                                          if (oldIndex >= imagePaths.length ||
+                                              newIndex >= imagePaths.length)
+                                            return;
 
                                           setState(() {
-                                            final item = imagePaths.removeAt(oldIndex);
+                                            final item =
+                                                imagePaths.removeAt(oldIndex);
                                             imagePaths.insert(newIndex, item);
                                           });
                                         },
@@ -659,7 +757,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                     alignment: Alignment.bottomCenter,
                                     children: [
                                       CarouselSlider(
-                                        carouselController: buttonCarouselController,
+                                        carouselController:
+                                            buttonCarouselController,
                                         options: CarouselOptions(
                                           height: 400.0,
                                           enlargeCenterPage: true,
@@ -674,7 +773,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                           return Container(
                                             margin: const EdgeInsets.all(5),
                                             decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               image: DecorationImage(
                                                 image: AssetImage(imageUrl),
                                                 fit: BoxFit.cover,
@@ -703,7 +803,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                         bottom: 40,
                                         left: 10,
                                         child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             AppText(
                                               text: "Yoon650",
@@ -724,7 +825,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   ),
                                   10.verticalSpace,
                                   Container(
-                                    margin: EdgeInsets.symmetric(horizontal: 10.w),
+                                    margin:
+                                        EdgeInsets.symmetric(horizontal: 10.w),
                                     decoration: BoxDecoration(
                                       // boxShadow: [
                                       //   BoxShadow(
@@ -733,17 +835,22 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                       //     offset: const Offset(0, 2),
                                       //   ),
                                       // ],
-                                      color: Theme.of(context).appBarTheme.backgroundColor,
+                                      color: Theme.of(context)
+                                          .appBarTheme
+                                          .backgroundColor,
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 15),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           20.verticalSpace,
                                           const AppText(
-                                            text: "Want to meet, Want to meet, Want to Know Someone, eat, travel together",
+                                            text:
+                                                "Want to meet, Want to meet, Want to Know Someone, eat, travel together",
                                             fontSize: 20,
                                             fontWeight: FontWeight.w800,
                                             color: AppColors.black,
@@ -755,28 +862,39 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
                                   ),
                                   20.verticalSpace,
                                   Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 15.w),
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 15.w),
                                     child: Container(
                                       decoration: BoxDecoration(
-                                        color: Theme.of(context).appBarTheme.backgroundColor,
+                                        color: Theme.of(context)
+                                            .appBarTheme
+                                            .backgroundColor,
                                       ),
-                                      width: double.infinity, // Ensures the container takes the available width
+                                      width: double
+                                          .infinity, // Ensures the container takes the available width
                                       child: Wrap(
-                                        alignment: WrapAlignment.start, // Align items to the start
+                                        alignment: WrapAlignment
+                                            .start, // Align items to the start
                                         children: List.generate(
                                           controller.languages.length,
                                           (index) => Container(
                                             margin: const EdgeInsets.all(8),
-                                            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 15, vertical: 8),
                                             decoration: BoxDecoration(
-                                              color: index == 0 ? const Color(0xff8cfb78) : AppColors.backgroundlight,
-                                              borderRadius: BorderRadius.circular(10),
+                                              color: index == 0
+                                                  ? const Color(0xff8cfb78)
+                                                  : AppColors.backgroundlight,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
                                             child: AppText(
                                               text: controller.languages[index],
                                               fontSize: 15,
                                               fontWeight: FontWeight.w600,
-                                              color: Theme.of(context).colorScheme.onPrimary,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onPrimary,
                                             ),
                                           ),
                                         ),
@@ -805,7 +923,10 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
       borderRadius: BorderRadius.circular(12),
       child: Stack(
         children: [
-          Image.asset(imagePaths[index], fit: BoxFit.cover, width: double.infinity, height: double.infinity),
+          Image.asset(imagePaths[index],
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity),
           if (index == 0) // "Main Photo" label
             Positioned(
               bottom: 5,
@@ -813,7 +934,8 @@ class _ProfileViewScreensState extends State<ProfileViewScreens> {
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 color: Colors.black54,
-                child: const Text("Main Photo", style: TextStyle(color: Colors.white)),
+                child: const Text("Main Photo",
+                    style: TextStyle(color: Colors.white)),
               ),
             ),
         ],
